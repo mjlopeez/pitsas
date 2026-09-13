@@ -26,6 +26,35 @@ cd frontend && npm install && npm run dev
 cd backend && source .venv/bin/activate && python -m app.seed.simulate --intervalo 3
 ```
 
+### Antes de correr `scripts/smoke.sh` en un clon nuevo
+
+```bash
+cd frontend && npm install && npm run build
+```
+
+`frontend/dist/` está en `.gitignore` porque es artefacto de compilación, así
+que un clon recién bajado no lo tiene. Sin ese build, `./backend/run.sh --prod`
+sirve un JSON en la raíz en vez del Command Center, y el smoke reporta **3
+fallos** que no son tales:
+
+```
+la raiz devuelve la aplicacion, no un JSON de instrucciones
+y CADA asset que ese HTML pide responde 200
+la aplicacion tambien responde por /app
+```
+
+Con el build hecho: **107 OK**.
+
+### Los endpoints que mutan piden token cuando la API está expuesta
+
+```bash
+export HUB_ADMIN_TOKEN=<el que esté en backend/.env>
+./scripts/smoke.sh
+```
+
+Sin esta variable, los `POST /admin/*` responden `401` y el smoke falla en
+bloque. Ver `backend/.env.example`.
+
 Sin llaves de API el sistema **funciona completo**: la transcripción usa audios
 sembrados, el NER usa un extractor por reglas (saca 4 520 h de «cuatro mil
 quinientas veinte») y el OCR devuelve una lectura determinista. Con
