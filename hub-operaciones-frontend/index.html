@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Grupo ECON — Hub de Operaciones & Demostración PEA</title>
+  <meta name="description" content="Plataforma de Operaciones de Maquinaria, Concreto y Conciliación Silos Startrack-Nexus conforme a ISO 15143-3 en El Salvador">
+  
+  <!-- Google Fonts: Old Standard TT (Editorial Serif) & Open Sans (Editorial Body) & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Old Standard TT"', 'Georgia', 'serif'],
+            sans: ['"Open Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            gold: {
+              400: '#d4af37',
+              500: '#bf9410',
+              600: '#a37c09',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Estilos Custom Editorial Goodlife -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-[#fbfbfb] text-[#111111] font-sans flex flex-col min-h-screen antialiased selection:bg-[#bf9410] selection:text-white overflow-x-hidden">
+
+  <!-- Barra Superior Global de Plataformas y Estado PEA -->
+  <div id="global-portal-bar" class="sticky top-0 z-50"></div>
+
+  <!-- Plataforma 1: Hub de Operaciones — Grupo ECON (Paleta Azul & Oro Editorial) -->
+  <div id="platform-hub" class="flex-1 flex flex-col">
+    <!-- Header Superior con Menú de Módulos Desplegable -->
+    <div id="header-root"></div>
+
+    <!-- Contenedor Principal de Vistas del Hub -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6">
+      <div id="tab-dashboard" class="transition-opacity duration-200"></div>
+      <div id="tab-map" class="hidden transition-opacity duration-200"></div>
+      <div id="tab-fleet" class="hidden transition-opacity duration-200"></div>
+      <div id="tab-reconciliation" class="hidden transition-opacity duration-200"></div>
+      <div id="tab-materials" class="hidden transition-opacity duration-200"></div>
+      <div id="tab-dispatch" class="hidden transition-opacity duration-200"></div>
+      <div id="tab-connectors" class="hidden transition-opacity duration-200"></div>
+    </main>
+  </div>
+
+  <!-- Plataforma 2: Mock Startrack Telematics (Paleta Rojo/Vermellón Editorial) -->
+  <div id="platform-startrack" class="hidden flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6"></div>
+
+  <!-- Plataforma 3: Mock Nexus ERP (Paleta Púrpura Editorial) -->
+  <div id="platform-nexus" class="hidden flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6"></div>
+
+  <!-- Footer Editorial GoodLife -->
+  <footer class="border-t border-[#e8e6e1] bg-white py-8 text-xs text-[#555555] mt-auto">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div>
+        <span class="font-editorial-serif text-base text-[#111111] tracking-wide block">GRUPO ECON</span>
+        <span class="gl-subtitle text-[9px] text-[#bf9410]">HUB DE OPERACIONES & CONCILIACIÓN • EL SALVADOR</span>
+      </div>
+      <div class="text-[11px] text-[#777777] max-w-md">
+        Norma ISO 15143-3 (AEMP 2.0) • Demostración de Enlace e Interoperabilidad entre Nexus ERP y Startrack Telematics
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contenedor de Modales Dinámicos -->
+  <div id="modal-root"></div>
+
+  <!-- Contenedor de Notificaciones Toast -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm"></div>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/components/globalPortalBar.js"></script>
+  <script src="js/components/startrackMock.js"></script>
+  <script src="js/components/nexusMock.js"></script>
+  <script src="js/components/header.js"></script>
+  <script src="js/components/dashboard.js"></script>
+  <script src="js/components/fleetMap.js"></script>
+  <script src="js/components/fleetList.js"></script>
+  <script src="js/components/reconciliation.js"></script>
+  <script src="js/components/materials.js"></script>
+  <script src="js/components/dispatch.js"></script>
+  <script src="js/components/connectors.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

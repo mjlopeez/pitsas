@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+*.db
+# SQLite escribe estos dos sidecars junto a la base y cambian en CADA
+# corrida. Versionarlos ensucia el repo de todos con binarios que se
+# regeneran solos. *.db no los cubre: no terminan en .db.
+*.db-wal
+*.db-shm
+*.sqlite3
+node_modules/
+dist/
+.DS_Store
+data/

@@ -1,0 +1,17 @@
+{
+  "name": "Captura de campo — Hub ECON",
+  "short_name": "Campo ECON",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0e1317",
+  "theme_color": "#0e1317",
+  "lang": "es-SV",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%230e1317'/%3E%3Ctext x='96' y='128' font-size='96' text-anchor='middle' fill='%23e8763c' font-family='sans-serif' font-weight='bold'%3EE%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}

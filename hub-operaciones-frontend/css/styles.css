@@ -1,0 +1,339 @@
+/* ==========================================================================
+   ESTILO EDITORIAL DE ALTA GAMA — INSPIRADO EN GOODLIFE EL SALVADOR
+   Arquitectura limpia, fondos claros, tipografía clásica serif, sin "AI slop"
+   Totalmente optimizado para pantallas de smartphones y escritorio
+   ========================================================================== */
+
+:root {
+  --gl-bg-canvas: #fbfbfb;
+  --gl-bg-card: #ffffff;
+  --gl-bg-card-subtle: #f8f8f6;
+  --gl-text-primary: #111111;
+  --gl-text-secondary: #555555;
+  --gl-text-muted: #888888;
+  --gl-border: #e8e6e1;
+  --gl-border-dark: #111111;
+  --gl-gold: #bf9410;
+  --gl-gold-hover: #a37c0a;
+  
+  --gl-econ-navy: #0e2439;
+  --gl-startrack-red: #c62828;
+  --gl-nexus-purple: #423d90;
+  
+  --font-serif: 'Old Standard TT', Georgia, serif;
+  --font-sans: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Base Editorial */
+body {
+  background-color: var(--gl-bg-canvas);
+  color: var(--gl-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, .font-editorial-serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--gl-text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* Subtítulos Clásicos Goodlife (WHO WE ARE, WHAT WE DO) */
+.gl-subtitle {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gl-gold);
+  display: block;
+}
+
+.gl-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--gl-text-primary);
+  line-height: 1.25;
+}
+
+/* Separador Ondulado Zigzag SVG Oficial de Goodlife */
+.gl-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 14px 0 20px 0;
+}
+
+.gl-separator svg path {
+  stroke: var(--gl-gold);
+  stroke-width: 1.2px;
+}
+
+.gl-separator-dark svg path {
+  stroke: var(--gl-text-primary);
+}
+
+/* Tarjetas Limpias Editoriales (Cero AI Slop) */
+.gl-card {
+  background-color: var(--gl-bg-card);
+  border: 1px solid var(--gl-border);
+  border-radius: 4px;
+  box-shadow: 0 2px 12px -2px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.gl-card:hover {
+  box-shadow: 0 6px 20px -3px rgba(0, 0, 0, 0.08);
+  border-color: #d6d3cb;
+}
+
+/* Botones Editorial GoodLife */
+.gl-btn-black {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.gl-btn-black:hover {
+  background-color: #222222;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.gl-btn-gold {
+  background-color: var(--gl-gold);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.gl-btn-gold:hover {
+  background-color: var(--gl-gold-hover);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.gl-btn-outline {
+  background-color: transparent;
+  color: #111111;
+  border: 1px solid #111111;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 11px 20px;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.gl-btn-outline:hover {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+/* Botón de Startrack (Rojo Editorial) */
+.gl-btn-red {
+  background-color: var(--gl-startrack-red);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.gl-btn-red:hover {
+  background-color: #a81c1c;
+  color: #ffffff;
+}
+
+/* Botón de Nexus (Púrpura Editorial) */
+.gl-btn-purple {
+  background-color: var(--gl-nexus-purple);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.gl-btn-purple:hover {
+  background-color: #342f75;
+  color: #ffffff;
+}
+
+/* Badges Editoriales */
+.gl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+  border: 1px solid var(--gl-border);
+  background: var(--gl-bg-card-subtle);
+  color: var(--gl-text-secondary);
+}
+
+.gl-badge-gold {
+  background-color: #fdfaf0;
+  border-color: #ecd99a;
+  color: #8c6a05;
+}
+
+.gl-badge-success {
+  background-color: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #15803d;
+}
+
+.gl-badge-danger {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.gl-badge-navy {
+  background-color: #f0f4f8;
+  border-color: #bcccdc;
+  color: #102a43;
+}
+
+/* Drawer de Módulos */
+.gl-drawer {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+}
+
+.gl-drawer.open {
+  max-height: 700px;
+  opacity: 1;
+}
+
+/* Código & JSON Blocks */
+pre, code {
+  font-family: var(--font-mono);
+}
+
+.gl-codebox {
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  border-radius: 4px;
+  padding: 14px;
+  font-size: 11px;
+  line-height: 1.5;
+  overflow-x: auto;
+  border: 1px solid #333333;
+}
+
+/* Tablas Editoriales Responsivas para Móviles */
+.gl-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  text-align: left;
+}
+
+.gl-table th {
+  background-color: #f4f3f0;
+  color: var(--gl-text-primary);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--gl-border);
+}
+
+.gl-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--gl-border);
+  color: #333333;
+}
+
+.gl-table tr:hover td {
+  background-color: #faf9f6;
+}
+
+/* Utilidades para Smartphone */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Modales */
+.modal-overlay {
+  background-color: rgba(17, 17, 17, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+/* Leaflet Map Styling Override */
+.leaflet-container {
+  font-family: var(--font-sans) !important;
+  border-radius: 4px;
+}
