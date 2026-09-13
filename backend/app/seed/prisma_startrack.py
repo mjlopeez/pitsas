@@ -36,7 +36,32 @@ Duenio: Wilbert
 """
 from __future__ import annotations
 
+from datetime import datetime, timedelta, timezone
+
 from ..db import q1, x
+
+
+def _hace(horas: float) -> str:
+    """Timestamp relativo a AHORA, en ISO 8601.
+
+    ⚠️ Por que relativo y no la fecha fija del export:
+
+    La exposicion cuenta JORNADAS COMPLETAS desde el ultimo evento
+    (`int(dias)` en correlacion.py). Con una fecha fija, cada dia que pasa
+    suma una jornada facturada y los numeros del guion se mueven solos:
+
+        EXC-02  $75    ->  $1,275   al cruzar las 48 h
+        EXC-03  $9.50  ->  $769.50
+        RE-01   $0     ->  $1,680   al cruzar las 24 h
+
+    Ahi se muere el argumento de que "la KPI se queda callada cuando todo
+    esta bien": la maquina sana gritaria mas fuerte que la averiada.
+
+    El INTERVALO es lo que sostiene el guion ("30 h sin reportar") y se
+    conserva exacto. Lo que se mueve es la fecha absoluta, que no se cita en
+    ninguna parte del pitch.
+    """
+    return (datetime.now(timezone.utc) - timedelta(hours=horas)).isoformat()
 
 
 def _sol(**kw) -> None:
@@ -129,7 +154,7 @@ def sembrar_casos() -> dict[str, int]:
         destino_proyecto_nombre="PROY-001 - Aventra - Proyecto Alfa - Ahuachapán",
         motorista_id="MOT-001", motorista_nombre="Maria Jose Lopez Ramirez",
         conexion="Sin conexion", ultimo_evento="Respuesta a comando",
-        ultimo_evento_at="2026-09-11T11:07:00-06:00",
+        ultimo_evento_at=_hace(30),   # 1 jornada, sin medicion -> $1,200
         identificador_raw="EXC-01 (EXC-17006EC)",
         # remote_id es el campo que Startrack documenta para cruzar con otros
         # sistemas, y acepta el formato del No. de activo de Nexus tal cual.
@@ -182,7 +207,7 @@ def sembrar_casos() -> dict[str, int]:
         # El evento de la TAREA es de ayer; el dispositivo sigue reportando
         # hace media hora. En la API de Startrack son dos cosas distintas:
         # los eventos de job y el last_contact_date del rastreador.
-        ultimo_evento_at="2026-09-11T06:30:00-06:00",
+        ultimo_evento_at=_hace(30),   # 1 jornada, 7.5 h medidas -> $75
         identificador_raw="EXC-02 (EXC-17007EC)",
         remote_id="EXC-17007EC", vehicle_id="939", workflow_role="1",
         coms_age_s=1800, estado_vehiculo=0,
@@ -224,7 +249,7 @@ def sembrar_casos() -> dict[str, int]:
         destino_proyecto_nombre="PROY-003 - EconHackers - Proyecto Gamma - Sonsonate",
         motorista_id="MOT-003", motorista_nombre="Sergio Henriquez",
         conexion="Conectado", ultimo_evento="Fin de traslado",
-        ultimo_evento_at="2026-09-11T07:15:00-06:00",
+        ultimo_evento_at=_hace(30),   # 1 jornada, 7.9 h medidas -> $9.50
         identificador_raw="EXC-03 (EXC-22008EC)",
         remote_id="EXC-22008EC", vehicle_id="1122", workflow_role="1",
         coms_age_s=2400, estado_vehiculo=0,
@@ -285,7 +310,7 @@ def sembrar_casos() -> dict[str, int]:
         destino_proyecto_nombre="PROY-004 - FASI - Proyecto Delta - Chalatenango",
         motorista_id="MOT-004", motorista_nombre="Helder Ariel Alfaro Alvarez",
         conexion="Conectado", ultimo_evento="Reporte de posicion",
-        ultimo_evento_at="2026-09-12T08:00:00-06:00",
+        ultimo_evento_at=_hace(12),   # <1 jornada -> $0: aqui el riesgo NO es el costo
         identificador_raw="RE-01 (RE-22007EC)",
         remote_id="RE-22007EC", vehicle_id="1408", workflow_role="0",
         coms_age_s=3600,
