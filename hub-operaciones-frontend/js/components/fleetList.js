@@ -42,33 +42,29 @@ function renderFleetList(container) {
     <div class="space-y-4">
       
       <!-- Encabezado Editorial Goodlife -->
-      <div class="gl-card p-6 sm:p-8 bg-white border border-[#e8e6e1]">
-        <span class="gl-subtitle text-[#bf9410] block mb-1">TELEMETRÍA DE CAMPO ISO 15143-3 • GRUPO ECON</span>
-        <h2 class="font-editorial-serif text-2xl sm:text-3xl font-normal text-[#111111] tracking-wide">
+      <div class="gl-card p-6 sm:p-8 bg-white border border-[#d4dfe8]">
+        <span class="gl-subtitle text-[#2e5b82] block mb-1">TELEMETRÍA DE CAMPO ISO 15143-3 • GRUPO ECON</span>
+        <h2 class="font-sans text-2xl sm:text-3xl font-bold text-[#1e293b] tracking-tight tracking-wide">
           Directorio de Maquinaria Pesada & Activos
         </h2>
-        <div class="gl-separator justify-start my-2">
-          <svg width="65" height="12" viewBox="0 0 65 12" fill="none">
-            <path stroke="#bf9410" stroke-width="1.2" stroke-miterlimit="3" d="M1 10 L9 2 L17 10 L24 2 L32 10 L39 2 L47 10 L54 2 L64 10"/>
-          </svg>
-        </div>
-        <p class="text-xs sm:text-sm text-[#555555] max-w-2xl leading-relaxed">
+        <div class="gl-separator justify-start my-2"></div>
+        <p class="text-xs sm:text-sm text-[#475569] max-w-2xl leading-relaxed">
           152 unidades monitoreadas por bus CAN J1939 y enlace satelital en las 18 obras de El Salvador. Auditoría de horómetros, consumos y órdenes de taller.
         </p>
       </div>
 
       <!-- Barra de Filtros y Búsqueda Adaptada para Móvil -->
-      <div class="gl-card p-4 bg-white border border-[#e8e6e1] flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+      <div class="gl-card p-4 bg-white border border-[#d4dfe8] flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
         
         <!-- Input de Búsqueda -->
         <div class="relative w-full lg:w-72">
-          <i data-lucide="search" class="w-4 h-4 text-[#777777] absolute left-3 top-1/2 -translate-y-1/2"></i>
+          <i data-lucide="search" class="w-4 h-4 text-[#64748b] absolute left-3 top-1/2 -translate-y-1/2"></i>
           <input 
             type="text" 
             id="fleet-search-input" 
             placeholder="Buscar CAT-320, Komatsu, Excavadora..." 
             value="${state.filterSearch || ''}"
-            class="w-full pl-9 pr-3 py-2 text-xs bg-white border border-[#d6d3cb] rounded text-[#111111] placeholder-[#888888] focus:outline-none focus:border-[#111111]"
+            class="w-full pl-9 pr-3 py-2 text-xs bg-white border border-[#cbd5e1] rounded text-[#1e293b] placeholder-[#888888] focus:outline-none focus:border-[#1e293b]"
           >
         </div>
 
@@ -76,7 +72,7 @@ function renderFleetList(container) {
         <div class="flex flex-wrap items-center gap-2 w-full lg:w-auto">
           
           <!-- Filtro Obra -->
-          <select id="fleet-filter-project" class="px-3 py-2 text-xs bg-white border border-[#d6d3cb] rounded text-[#333333] focus:outline-none focus:border-[#111111] cursor-pointer">
+          <select id="fleet-filter-project" class="px-3 py-2 text-xs bg-white border border-[#cbd5e1] rounded text-[#334155] focus:outline-none focus:border-[#1e293b] cursor-pointer">
             <option value="TODOS">Todas las Obras (${projects.length})</option>
             ${projects.map(p => `
               <option value="${p.project_id}" ${selectedProj === p.project_id ? 'selected' : ''}>
@@ -86,7 +82,7 @@ function renderFleetList(container) {
           </select>
 
           <!-- Filtro Motor -->
-          <select id="fleet-filter-engine" class="px-3 py-2 text-xs bg-white border border-[#d6d3cb] rounded text-[#333333] focus:outline-none focus:border-[#111111] cursor-pointer">
+          <select id="fleet-filter-engine" class="px-3 py-2 text-xs bg-white border border-[#cbd5e1] rounded text-[#334155] focus:outline-none focus:border-[#1e293b] cursor-pointer">
             <option value="TODOS" ${selectedEngine === 'TODOS' ? 'selected' : ''}>Motor (Todos)</option>
             <option value="ON" ${selectedEngine === 'ON' ? 'selected' : ''}>Encendido (ON)</option>
             <option value="IDLE" ${selectedEngine === 'IDLE' ? 'selected' : ''}>Ralentí (IDLE)</option>
@@ -94,7 +90,7 @@ function renderFleetList(container) {
           </select>
 
           <!-- Filtro Tipo de Maquinaria -->
-          <select id="fleet-filter-kind" class="px-3 py-2 text-xs bg-white border border-[#d6d3cb] rounded text-[#333333] focus:outline-none focus:border-[#111111] cursor-pointer">
+          <select id="fleet-filter-kind" class="px-3 py-2 text-xs bg-white border border-[#cbd5e1] rounded text-[#334155] focus:outline-none focus:border-[#1e293b] cursor-pointer">
             <option value="TODOS" ${selectedKind === 'TODOS' ? 'selected' : ''}>Categoría (Todas)</option>
             ${allKinds.map(k => `
               <option value="${k}" ${selectedKind === k ? 'selected' : ''}>${k.toUpperCase()}</option>
@@ -102,11 +98,11 @@ function renderFleetList(container) {
           </select>
 
           <!-- Alternar Vista Tarjetas / Tabla -->
-          <div class="flex items-center bg-[#f4f3f0] border border-[#d6d3cb] rounded p-0.5 ml-auto">
-            <button id="btn-view-cards" title="Vista Cuadrícula" class="p-1.5 rounded ${currentViewMode === 'cards' ? 'bg-[#111111] text-white' : 'text-[#777777] hover:text-[#111111]'}">
+          <div class="flex items-center bg-[#f1f5f9] border border-[#cbd5e1] rounded p-0.5 ml-auto">
+            <button id="btn-view-cards" title="Vista Cuadrícula" class="p-1.5 rounded ${currentViewMode === 'cards' ? 'bg-[#1e293b] text-white' : 'text-[#64748b] hover:text-[#1e293b]'}">
               <i data-lucide="layout-grid" class="w-4 h-4"></i>
             </button>
-            <button id="btn-view-table" title="Vista Tabla" class="p-1.5 rounded ${currentViewMode === 'table' ? 'bg-[#111111] text-white' : 'text-[#777777] hover:text-[#111111]'}">
+            <button id="btn-view-table" title="Vista Tabla" class="p-1.5 rounded ${currentViewMode === 'table' ? 'bg-[#1e293b] text-white' : 'text-[#64748b] hover:text-[#1e293b]'}">
               <i data-lucide="list" class="w-4 h-4"></i>
             </button>
           </div>
@@ -116,14 +112,14 @@ function renderFleetList(container) {
       </div>
 
       <!-- Resumen de Resultados -->
-      <div class="flex items-center justify-between text-xs text-[#666666] px-1">
+      <div class="flex items-center justify-between text-xs text-[#64748b] px-1">
         <div>
-          Mostrando <strong class="text-[#111111]">${filteredAssets.length}</strong> equipos filtrados de <strong class="text-[#111111]">${assets.length}</strong> totales
+          Mostrando <strong class="text-[#1e293b]">${filteredAssets.length}</strong> equipos filtrados de <strong class="text-[#1e293b]">${assets.length}</strong> totales
         </div>
         <div class="flex items-center gap-2">
           <span>Pág. ${currentPage} de ${totalPages}</span>
-          <button id="btn-prev-page" class="px-2 py-1 bg-white border border-[#d6d3cb] rounded text-[#333333] disabled:opacity-40" ${currentPage <= 1 ? 'disabled' : ''}>Ant</button>
-          <button id="btn-next-page" class="px-2 py-1 bg-white border border-[#d6d3cb] rounded text-[#333333] disabled:opacity-40" ${currentPage >= totalPages ? 'disabled' : ''}>Sig</button>
+          <button id="btn-prev-page" class="px-2 py-1 bg-white border border-[#cbd5e1] rounded text-[#334155] disabled:opacity-40" ${currentPage <= 1 ? 'disabled' : ''}>Ant</button>
+          <button id="btn-next-page" class="px-2 py-1 bg-white border border-[#cbd5e1] rounded text-[#334155] disabled:opacity-40" ${currentPage >= totalPages ? 'disabled' : ''}>Sig</button>
         </div>
       </div>
 
@@ -217,10 +213,10 @@ function renderFleetList(container) {
 function renderAssetCards(assets) {
   if (assets.length === 0) {
     return `
-      <div class="gl-card p-12 text-center bg-white border border-[#e8e6e1]">
-        <i data-lucide="search-x" class="w-10 h-10 text-[#bf9410] mx-auto mb-3 opacity-60"></i>
-        <h4 class="font-editorial-serif text-lg font-normal text-[#111111]">No se encontraron equipos</h4>
-        <p class="text-xs text-[#777777] mt-1">Prueba ajustando los filtros de búsqueda u obra.</p>
+      <div class="gl-card p-12 text-center bg-white border border-[#d4dfe8]">
+        <i data-lucide="search-x" class="w-10 h-10 text-[#2e5b82] mx-auto mb-3 opacity-60"></i>
+        <h4 class="font-sans text-lg font-bold text-[#1e293b]">No se encontraron equipos</h4>
+        <p class="text-xs text-[#64748b] mt-1">Prueba ajustando los filtros de búsqueda u obra.</p>
       </div>
     `;
   }
@@ -230,21 +226,21 @@ function renderAssetCards(assets) {
       ${assets.map(asset => {
         const pctServicio = Math.min(100, Math.max(0, Math.round(asset.pct_servicio || 0)));
         const serviceWarning = pctServicio >= 90;
-        const serviceBarColor = serviceWarning ? 'bg-[#c62828]' : pctServicio > 70 ? 'bg-amber-500' : 'bg-[#0e2439]';
+        const serviceBarColor = serviceWarning ? 'bg-[#36536e]' : pctServicio > 70 ? 'bg-amber-500' : 'bg-[#1e293b]';
 
         return `
-          <div class="gl-card p-4 sm:p-5 bg-white border border-[#e8e6e1] hover:border-[#111111] flex flex-col justify-between transition-all">
+          <div class="gl-card p-4 sm:p-5 bg-white border border-[#d4dfe8] hover:border-[#1e293b] flex flex-col justify-between transition-all">
             <div>
               <!-- Header Tarjeta -->
-              <div class="flex items-start justify-between gap-2 mb-2 pb-2 border-b border-[#e8e6e1]">
+              <div class="flex items-start justify-between gap-2 mb-2 pb-2 border-b border-[#d4dfe8]">
                 <div>
                   <div class="flex items-center gap-1.5">
-                    <span class="font-bold text-[#111111] font-mono text-sm tracking-tight">${asset.asset_identifier}</span>
+                    <span class="font-bold text-[#1e293b] font-mono text-sm tracking-tight">${asset.asset_identifier}</span>
                     <span class="gl-badge text-[9px] uppercase">
                       ${asset.telemetry}
                     </span>
                   </div>
-                  <div class="text-xs text-[#555555] font-medium">${asset.make} ${asset.model}</div>
+                  <div class="text-xs text-[#475569] font-medium">${asset.make} ${asset.model}</div>
                 </div>
 
                 <span class="gl-badge ${asset.engine_state === 'ON' ? 'gl-badge-success' : asset.engine_state === 'IDLE' ? 'gl-badge-gold' : 'gl-badge-navy'} text-[9px]">
@@ -253,40 +249,40 @@ function renderAssetCards(assets) {
               </div>
 
               <!-- Tipo y Obra -->
-              <div class="text-xs text-[#666666] mb-3 space-y-1">
+              <div class="text-xs text-[#64748b] mb-3 space-y-1">
                 <div class="flex items-center justify-between">
                   <span>Categoría:</span>
-                  <span class="font-semibold text-[#111111] capitalize">${asset.kind}</span>
+                  <span class="font-semibold text-[#1e293b] capitalize">${asset.kind}</span>
                 </div>
                 <div class="flex items-center justify-between">
                   <span>Obra Asignada:</span>
-                  <span class="font-semibold text-[#0e2439] truncate max-w-[160px]">${asset.assigned_project || 'Sin Asignar'}</span>
+                  <span class="font-semibold text-[#1e293b] truncate max-w-[160px]">${asset.assigned_project || 'Sin Asignar'}</span>
                 </div>
               </div>
 
               <!-- Métricas Rápidas -->
-              <div class="grid grid-cols-2 gap-2 p-2.5 rounded bg-[#faf9f6] border border-[#e8e6e1] text-xs mb-3 font-mono">
+              <div class="grid grid-cols-2 gap-2 p-2.5 rounded bg-[#f8fafc] border border-[#d4dfe8] text-xs mb-3 font-mono">
                 <div>
-                  <span class="text-[9px] text-[#777777] uppercase tracking-wider block font-sans">Horómetro</span>
-                  <span class="font-bold text-[#111111] text-sm">${asset.operating_hours?.toFixed(1) || 0} h</span>
+                  <span class="text-[9px] text-[#64748b] uppercase tracking-wider block font-sans">Horómetro</span>
+                  <span class="font-bold text-[#1e293b] text-sm">${asset.operating_hours?.toFixed(1) || 0} h</span>
                 </div>
                 <div>
-                  <span class="text-[9px] text-[#777777] uppercase tracking-wider block font-sans">Combustible</span>
-                  <span class="font-bold text-[#111111] text-sm">${asset.cumulative_fuel?.toFixed(1) || 0} gal</span>
+                  <span class="text-[9px] text-[#64748b] uppercase tracking-wider block font-sans">Combustible</span>
+                  <span class="font-bold text-[#1e293b] text-sm">${asset.cumulative_fuel?.toFixed(1) || 0} gal</span>
                 </div>
               </div>
 
               <!-- Barra de Mantenimiento Preventivo -->
               <div class="mb-4">
                 <div class="flex items-center justify-between text-[11px] mb-1">
-                  <span class="text-[#777777]">Ciclo Taller (250h)</span>
-                  <span class="font-mono font-bold ${serviceWarning ? 'text-[#c62828]' : 'text-[#111111]'}">${pctServicio}%</span>
+                  <span class="text-[#64748b]">Ciclo Taller (250h)</span>
+                  <span class="font-mono font-bold ${serviceWarning ? 'text-[#36536e]' : 'text-[#1e293b]'}">${pctServicio}%</span>
                 </div>
                 <div class="service-progress-bg">
                   <div class="service-progress-bar ${serviceBarColor}" style="width: ${pctServicio}%"></div>
                 </div>
                 ${serviceWarning ? `
-                  <div class="text-[10px] text-[#c62828] font-semibold mt-1 flex items-center gap-1">
+                  <div class="text-[10px] text-[#36536e] font-semibold mt-1 flex items-center gap-1">
                     <i data-lucide="alert-circle" class="w-3 h-3"></i> Mantenimiento Requerido
                   </div>
                 ` : ''}
@@ -295,12 +291,12 @@ function renderAssetCards(assets) {
             </div>
 
             <!-- Botones de Acción -->
-            <div class="pt-2 border-t border-[#e8e6e1] flex items-center gap-2">
+            <div class="pt-2 border-t border-[#d4dfe8] flex items-center gap-2">
               <button onclick="window.openAssetModal('${asset.asset_identifier}')" class="gl-btn-black flex-1 text-center justify-center text-xs">
                 Ficha Técnica
               </button>
               ${serviceWarning ? `
-                <button onclick="window.closeAssetServiceAction('${asset.asset_identifier}')" title="Cerrar servicio en taller" class="p-2 rounded bg-[#c62828] hover:bg-[#b71c1c] text-white text-xs min-h-[38px] flex items-center justify-center">
+                <button onclick="window.closeAssetServiceAction('${asset.asset_identifier}')" title="Cerrar servicio en taller" class="p-2 rounded bg-[#36536e] hover:bg-[#b71c1c] text-white text-xs min-h-[38px] flex items-center justify-center">
                   <i data-lucide="wrench" class="w-4 h-4"></i>
                 </button>
               ` : ''}
@@ -315,7 +311,7 @@ function renderAssetCards(assets) {
 
 function renderAssetTable(assets) {
   if (assets.length === 0) {
-    return `<div class="gl-card p-8 text-center text-[#777777] text-xs">No hay datos que coincidan.</div>`;
+    return `<div class="gl-card p-8 text-center text-[#64748b] text-xs">No hay datos que coincidan.</div>`;
   }
 
   return `
@@ -341,29 +337,29 @@ function renderAssetTable(assets) {
 
             return `
               <tr>
-                <td class="font-mono font-bold text-[#111111]">
+                <td class="font-mono font-bold text-[#1e293b]">
                   ${asset.asset_identifier}
                 </td>
-                <td class="text-[#333333]">${asset.make} ${asset.model}</td>
-                <td class="text-[#666666] capitalize">${asset.kind}</td>
-                <td class="font-semibold text-[#0e2439]">${asset.assigned_project || 'Sin Asignar'}</td>
+                <td class="text-[#334155]">${asset.make} ${asset.model}</td>
+                <td class="text-[#64748b] capitalize">${asset.kind}</td>
+                <td class="font-semibold text-[#1e293b]">${asset.assigned_project || 'Sin Asignar'}</td>
                 <td>
                   <span class="gl-badge ${asset.engine_state === 'ON' ? 'gl-badge-success' : asset.engine_state === 'IDLE' ? 'gl-badge-gold' : 'gl-badge-navy'} text-[9px]">
                     ${asset.engine_state}
                   </span>
                 </td>
-                <td class="font-mono font-bold text-[#111111]">${asset.operating_hours?.toFixed(1) || 0} h</td>
-                <td class="font-mono text-[#555555]">${asset.cumulative_fuel?.toFixed(1) || 0} gal</td>
+                <td class="font-mono font-bold text-[#1e293b]">${asset.operating_hours?.toFixed(1) || 0} h</td>
+                <td class="font-mono text-[#475569]">${asset.cumulative_fuel?.toFixed(1) || 0} gal</td>
                 <td>
                   <div class="flex items-center gap-2">
-                    <span class="font-mono text-xs ${serviceWarning ? 'text-[#c62828] font-bold' : 'text-[#555555]'}">${pctServicio}%</span>
+                    <span class="font-mono text-xs ${serviceWarning ? 'text-[#36536e] font-bold' : 'text-[#475569]'}">${pctServicio}%</span>
                     <div class="service-progress-bg w-16">
-                      <div class="service-progress-bar ${serviceWarning ? 'bg-[#c62828]' : 'bg-[#0e2439]'}" style="width: ${pctServicio}%"></div>
+                      <div class="service-progress-bar ${serviceWarning ? 'bg-[#36536e]' : 'bg-[#1e293b]'}" style="width: ${pctServicio}%"></div>
                     </div>
                   </div>
                 </td>
                 <td class="text-right">
-                  <button onclick="window.openAssetModal('${asset.asset_identifier}')" class="px-2.5 py-1 rounded bg-[#111111] hover:bg-[#333333] text-white font-semibold text-[11px] transition-colors">
+                  <button onclick="window.openAssetModal('${asset.asset_identifier}')" class="px-2.5 py-1 rounded bg-[#1e293b] hover:bg-[#334155] text-white font-semibold text-[11px] transition-colors">
                     Ver Ficha
                   </button>
                 </td>
@@ -386,59 +382,59 @@ window.openAssetModal = async function(assetId) {
 
   modalContainer.innerHTML = `
     <div class="fixed inset-0 z-50 flex items-center justify-center modal-overlay p-4">
-      <div class="gl-card w-full max-w-2xl p-6 sm:p-8 bg-white border border-[#e8e6e1] shadow-2xl max-h-[90vh] overflow-y-auto">
-        <div class="flex items-center justify-between border-b border-[#e8e6e1] pb-3 mb-4">
+      <div class="gl-card w-full max-w-2xl p-6 sm:p-8 bg-white border border-[#d4dfe8] shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center justify-between border-b border-[#d4dfe8] pb-3 mb-4">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded bg-[#faf9f6] border border-[#d6d3cb] flex items-center justify-center text-[#111111] font-mono font-bold">
+            <div class="w-10 h-10 rounded bg-[#f8fafc] border border-[#cbd5e1] flex items-center justify-center text-[#1e293b] font-mono font-bold">
               ${asset.asset_identifier.split('-')[0]}
             </div>
             <div>
-              <h3 class="font-editorial-serif text-xl font-normal text-[#111111]">${asset.asset_identifier}</h3>
-              <p class="text-xs text-[#666666]">${asset.make} ${asset.model} • ${asset.kind}</p>
+              <h3 class="font-sans text-xl font-bold text-[#1e293b]">${asset.asset_identifier}</h3>
+              <p class="text-xs text-[#64748b]">${asset.make} ${asset.model} • ${asset.kind}</p>
             </div>
           </div>
-          <button onclick="document.getElementById('modal-root').innerHTML = ''" class="text-[#777777] hover:text-[#111111] p-1">
+          <button onclick="document.getElementById('modal-root').innerHTML = ''" class="text-[#64748b] hover:text-[#1e293b] p-1">
             <i data-lucide="x" class="w-6 h-6"></i>
           </button>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 text-xs">
-          <div class="p-4 rounded border border-[#e8e6e1] bg-[#faf9f6] space-y-2">
-            <div class="text-[10px] font-bold text-[#bf9410] uppercase tracking-wider">Telemetría ISO 15143-3</div>
-            <div class="flex justify-between"><span class="text-[#777777]">Estado Motor:</span> <span class="font-bold text-[#111111]">${asset.engine_state}</span></div>
-            <div class="flex justify-between"><span class="text-[#777777]">Horómetro Total:</span> <span class="font-mono text-[#111111] font-bold">${asset.operating_hours?.toFixed(1) || 0} h</span></div>
-            <div class="flex justify-between"><span class="text-[#777777]">Combustible:</span> <span class="font-mono text-[#111111] font-bold">${asset.cumulative_fuel?.toFixed(1) || 0} gal</span></div>
-            <div class="flex justify-between"><span class="text-[#777777]">Enlace:</span> <span class="uppercase text-[#111111] font-semibold">${asset.telemetry}</span></div>
+          <div class="p-4 rounded border border-[#d4dfe8] bg-[#f8fafc] space-y-2">
+            <div class="text-[10px] font-bold text-[#2e5b82] uppercase tracking-wider">Telemetría ISO 15143-3</div>
+            <div class="flex justify-between"><span class="text-[#64748b]">Estado Motor:</span> <span class="font-bold text-[#1e293b]">${asset.engine_state}</span></div>
+            <div class="flex justify-between"><span class="text-[#64748b]">Horómetro Total:</span> <span class="font-mono text-[#1e293b] font-bold">${asset.operating_hours?.toFixed(1) || 0} h</span></div>
+            <div class="flex justify-between"><span class="text-[#64748b]">Combustible:</span> <span class="font-mono text-[#1e293b] font-bold">${asset.cumulative_fuel?.toFixed(1) || 0} gal</span></div>
+            <div class="flex justify-between"><span class="text-[#64748b]">Enlace:</span> <span class="uppercase text-[#1e293b] font-semibold">${asset.telemetry}</span></div>
           </div>
 
-          <div class="p-4 rounded border border-[#e8e6e1] bg-[#faf9f6] space-y-2">
-            <div class="text-[10px] font-bold text-[#bf9410] uppercase tracking-wider">Gestión de Obra & Asignación</div>
-            <div class="flex justify-between"><span class="text-[#777777]">Obra Asignada:</span> <span class="font-bold text-[#111111]">${asset.assigned_project || 'Sin Asignar'}</span></div>
-            <div class="flex justify-between"><span class="text-[#777777]">Alquilado a:</span> <span class="text-[#333333]">${asset.alquilado_a || 'Flota Propia'}</span></div>
-            <div class="flex justify-between"><span class="text-[#777777]">Coordenadas GPS:</span> <span class="font-mono text-[#555555]">${asset.lat?.toFixed(4)}, ${asset.lon?.toFixed(4)}</span></div>
-            <div class="flex justify-between"><span class="text-[#777777]">Último Reporte:</span> <span class="font-mono text-[#777777]">${new Date(asset.updated_at).toLocaleTimeString()}</span></div>
+          <div class="p-4 rounded border border-[#d4dfe8] bg-[#f8fafc] space-y-2">
+            <div class="text-[10px] font-bold text-[#2e5b82] uppercase tracking-wider">Gestión de Obra & Asignación</div>
+            <div class="flex justify-between"><span class="text-[#64748b]">Obra Asignada:</span> <span class="font-bold text-[#1e293b]">${asset.assigned_project || 'Sin Asignar'}</span></div>
+            <div class="flex justify-between"><span class="text-[#64748b]">Alquilado a:</span> <span class="text-[#334155]">${asset.alquilado_a || 'Flota Propia'}</span></div>
+            <div class="flex justify-between"><span class="text-[#64748b]">Coordenadas GPS:</span> <span class="font-mono text-[#475569]">${asset.lat?.toFixed(4)}, ${asset.lon?.toFixed(4)}</span></div>
+            <div class="flex justify-between"><span class="text-[#64748b]">Último Reporte:</span> <span class="font-mono text-[#64748b]">${new Date(asset.updated_at).toLocaleTimeString()}</span></div>
           </div>
         </div>
 
-        <div class="p-4 rounded border border-[#e8e6e1] bg-[#faf9f6] mb-6">
+        <div class="p-4 rounded border border-[#d4dfe8] bg-[#f8fafc] mb-6">
           <div class="flex justify-between text-xs mb-1">
-            <span class="text-[#111111] font-bold">Estado de Servicio en Taller</span>
-            <span class="font-mono font-bold text-[#0e2439]">${asset.horas_desde_servicio?.toFixed(1) || 0} h desde último servicio (Cada ${asset.service_every_h}h)</span>
+            <span class="text-[#1e293b] font-bold">Estado de Servicio en Taller</span>
+            <span class="font-mono font-bold text-[#1e293b]">${asset.horas_desde_servicio?.toFixed(1) || 0} h desde último servicio (Cada ${asset.service_every_h}h)</span>
           </div>
           <div class="service-progress-bg h-2 mb-2">
-            <div class="service-progress-bar ${asset.pct_servicio > 90 ? 'bg-[#c62828]' : 'bg-[#0e2439]'}" style="width: ${Math.min(100, Math.max(0, asset.pct_servicio || 0))}%"></div>
+            <div class="service-progress-bar ${asset.pct_servicio > 90 ? 'bg-[#36536e]' : 'bg-[#1e293b]'}" style="width: ${Math.min(100, Math.max(0, asset.pct_servicio || 0))}%"></div>
           </div>
-          <p class="text-[11px] text-[#666666]">
+          <p class="text-[11px] text-[#64748b]">
             Al cerrar el servicio en taller, se restablece el contador de horas hacia el horómetro actual y se reanuda la operación regular de la máquina.
           </p>
         </div>
 
-        <div class="flex justify-end gap-3 pt-3 border-t border-[#e8e6e1]">
+        <div class="flex justify-end gap-3 pt-3 border-t border-[#d4dfe8]">
           <button onclick="document.getElementById('modal-root').innerHTML = ''" class="gl-btn-outline">
             Cerrar
           </button>
           <button onclick="window.closeAssetServiceAction('${asset.asset_identifier}')" class="gl-btn-black">
-            <i data-lucide="wrench" class="w-4 h-4 text-[#bf9410]"></i>
+            <i data-lucide="wrench" class="w-4 h-4 text-[#2e5b82]"></i>
             <span>Cerrar Servicio de Taller</span>
           </button>
         </div>

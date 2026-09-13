@@ -9,19 +9,15 @@ function renderMaterials(container) {
     <div class="space-y-6">
       
       <!-- Banner Editorial de Operaciones de Materiales -->
-      <div class="gl-card p-6 sm:p-8 bg-white border border-[#e8e6e1]">
+      <div class="gl-card p-6 sm:p-8 bg-white border border-[#d4dfe8]">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <span class="gl-subtitle text-[#bf9410] block mb-1">CONTROL DE CALIDAD & TIEMPOS • GRUPO ECON</span>
-            <h2 class="font-editorial-serif text-2xl sm:text-3xl font-normal text-[#111111] tracking-wide">
+            <span class="gl-subtitle text-[#2e5b82] block mb-1">CONTROL DE CALIDAD & TIEMPOS • GRUPO ECON</span>
+            <h2 class="font-sans text-2xl sm:text-3xl font-bold text-[#1e293b] tracking-tight tracking-wide">
               Logística de Concreto & Asfalto en Tránsito
             </h2>
-            <div class="gl-separator justify-start my-2">
-              <svg width="65" height="12" viewBox="0 0 65 12" fill="none">
-                <path stroke="#bf9410" stroke-width="1.2" stroke-miterlimit="3" d="M1 10 L9 2 L17 10 L24 2 L32 10 L39 2 L47 10 L54 2 L64 10"/>
-              </svg>
-            </div>
-            <p class="text-xs sm:text-sm text-[#555555] max-w-2xl leading-relaxed">
+            <div class="gl-separator justify-start my-2"></div>
+            <p class="text-xs sm:text-sm text-[#475569] max-w-2xl leading-relaxed">
               Desde la dosificación en planta, cada m³ de concreto tiene una hora de muerte operativa ligada a las restricciones del VMT y cuadrillas en obra.
             </p>
           </div>
@@ -32,7 +28,7 @@ function renderMaterials(container) {
               <span>Dosificar Nueva Carga</span>
             </button>
             <button id="btn-open-lab-modal" class="gl-btn-outline">
-              <i data-lucide="flask-conical" class="w-4 h-4 text-[#bf9410]"></i>
+              <i data-lucide="flask-conical" class="w-4 h-4 text-[#2e5b82]"></i>
               <span>Registrar Ensayo Lab</span>
             </button>
           </div>
@@ -41,39 +37,39 @@ function renderMaterials(container) {
 
       <!-- Métricas Rápidas de Materiales -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="gl-card p-5 bg-white border border-[#e8e6e1]">
-          <span class="text-[10px] text-[#777777] font-bold uppercase tracking-wider">Total Cargas Monitoreadas</span>
-          <div class="font-editorial-serif text-3xl font-normal text-[#111111] font-mono mt-1">${cargas.length} lotes</div>
-          <p class="text-[11px] text-[#666666] mt-1">Concreto premezclado y mezclas asfálticas</p>
+        <div class="gl-card p-5 bg-white border border-[#d4dfe8]">
+          <span class="text-[10px] text-[#64748b] font-bold uppercase tracking-wider">Total Cargas Monitoreadas</span>
+          <div class="font-sans font-bold text-3xl font-normal text-[#1e293b] font-mono mt-1">${cargas.length} lotes</div>
+          <p class="text-[11px] text-[#64748b] mt-1">Concreto premezclado y mezclas asfálticas</p>
         </div>
 
-        <div class="gl-card p-5 bg-white border border-[#e8e6e1]">
-          <span class="text-[10px] text-[#15803d] font-bold uppercase tracking-wider">En Tránsito con Tiempo Válido</span>
-          <div class="font-editorial-serif text-3xl font-normal text-[#15803d] font-mono mt-1">
+        <div class="gl-card p-5 bg-white border border-[#d4dfe8]">
+          <span class="text-[10px] text-[#2b7a59] font-bold uppercase tracking-wider">En Tránsito con Tiempo Válido</span>
+          <div class="font-sans font-bold text-3xl font-normal text-[#2b7a59] font-mono mt-1">
             ${cargas.filter(c => (c.minutos_restantes || 0) > 0 && c.estado !== 'retenida').length} cargas
           </div>
-          <p class="text-[11px] text-[#666666] mt-1">Dentro de ventana de manejabilidad</p>
+          <p class="text-[11px] text-[#64748b] mt-1">Dentro de ventana de manejabilidad</p>
         </div>
 
-        <div class="gl-card p-5 bg-white border border-[#e8e6e1]">
-          <span class="text-[10px] text-[#c62828] font-bold uppercase tracking-wider">Retenidas / Vencidas</span>
-          <div class="font-editorial-serif text-3xl font-normal text-[#c62828] font-mono mt-1">
+        <div class="gl-card p-5 bg-white border border-[#d4dfe8]">
+          <span class="text-[10px] text-[#36536e] font-bold uppercase tracking-wider">Retenidas / Vencidas</span>
+          <div class="font-sans font-bold text-3xl font-normal text-[#36536e] font-mono mt-1">
             ${cargas.filter(c => c.estado === 'retenida' || (c.minutos_restantes || 0) <= 0).length} cargas
           </div>
-          <p class="text-[11px] text-[#666666] mt-1">Bloqueadas antes de vertido en obra</p>
+          <p class="text-[11px] text-[#64748b] mt-1">Bloqueadas antes de vertido en obra</p>
         </div>
       </div>
 
       <!-- Tarjetas de Cargas Vivas -->
       <div class="space-y-4">
-        <div class="flex items-center justify-between pb-2 border-b border-[#e8e6e1]">
-          <h3 class="font-editorial-serif text-lg font-normal text-[#111111]">Cargas Activas en Ruta</h3>
-          <span class="text-xs text-[#bf9410] font-mono font-bold">Reloj sincronizado en vivo</span>
+        <div class="flex items-center justify-between pb-2 border-b border-[#d4dfe8]">
+          <h3 class="font-sans text-lg font-bold text-[#1e293b]">Cargas Activas en Ruta</h3>
+          <span class="text-xs text-[#2e5b82] font-mono font-bold">Reloj sincronizado en vivo</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           ${cargas.length === 0 ? `
-            <div class="col-span-2 gl-card p-8 text-center text-[#777777] text-xs bg-white border border-[#e8e6e1]">
+            <div class="col-span-2 gl-card p-8 text-center text-[#64748b] text-xs bg-white border border-[#d4dfe8]">
               No hay cargas en tránsito actualmente. Crea una con el botón "Dosificar Nueva Carga".
             </div>
           ` : cargas.map(c => {
@@ -84,20 +80,20 @@ function renderMaterials(container) {
 
             return `
               <div class="gl-card p-5 sm:p-6 bg-white border transition-all ${
-                isRetenida || isVencida ? 'border-[#fca5a5] bg-[#fff5f5]' : isWarning ? 'border-[#fde68a] bg-[#fffdf5]' : 'border-[#e8e6e1]'
+                isRetenida || isVencida ? 'border-[#fca5a5] bg-[#fff5f5]' : isWarning ? 'border-[#fde68a] bg-[#fffdf5]' : 'border-[#d4dfe8]'
               } flex flex-col justify-between">
                 <div>
                   
                   <!-- Header Lote -->
-                  <div class="flex items-start justify-between gap-2 border-b border-[#e8e6e1] pb-2.5 mb-3">
+                  <div class="flex items-start justify-between gap-2 border-b border-[#d4dfe8] pb-2.5 mb-3">
                     <div>
                       <div class="flex items-center gap-2">
-                        <span class="font-bold text-[#111111] text-sm font-mono">${c.lote}</span>
+                        <span class="font-bold text-[#1e293b] text-sm font-mono">${c.lote}</span>
                         <span class="gl-badge text-[9px] uppercase">
                           ${c.tipo}
                         </span>
                       </div>
-                      <div class="text-xs text-[#666666] mt-0.5">Camión: <strong class="text-[#0e2439] font-mono">${c.asset_identifier}</strong></div>
+                      <div class="text-xs text-[#64748b] mt-0.5">Camión: <strong class="text-[#1e293b] font-mono">${c.asset_identifier}</strong></div>
                     </div>
 
                     <!-- Estado Badge -->
@@ -111,42 +107,42 @@ function renderMaterials(container) {
                   </div>
 
                   <!-- Temporizador Dinámico -->
-                  <div class="p-3.5 rounded border border-[#e8e6e1] bg-[#faf9f6] mb-3 flex items-center justify-between">
+                  <div class="p-3.5 rounded border border-[#d4dfe8] bg-[#f8fafc] mb-3 flex items-center justify-between">
                     <div>
-                      <span class="text-[9px] uppercase tracking-wider text-[#777777] block font-bold">Tiempo de Vida Restante</span>
-                      <div class="font-editorial-serif text-2xl font-normal font-mono ${isRetenida || isVencida ? 'text-[#c62828]' : isWarning ? 'text-amber-600' : 'text-[#15803d]'}">
+                      <span class="text-[9px] uppercase tracking-wider text-[#64748b] block font-bold">Tiempo de Vida Restante</span>
+                      <div class="font-sans font-bold text-2xl font-normal font-mono ${isRetenida || isVencida ? 'text-[#36536e]' : isWarning ? 'text-amber-600' : 'text-[#2b7a59]'}">
                         ${isVencida ? 'VENCIDO / PÉRDIDA' : `${minRest.toFixed(1)} minutos`}
                       </div>
                     </div>
-                    <div class="w-10 h-10 rounded flex items-center justify-center ${isRetenida || isVencida ? 'bg-rose-100 text-[#c62828]' : isWarning ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-[#15803d]'}">
+                    <div class="w-10 h-10 rounded flex items-center justify-center ${isRetenida || isVencida ? 'bg-rose-100 text-[#36536e]' : isWarning ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-[#2b7a59]'}">
                       <i data-lucide="${isRetenida ? 'shield-x' : isVencida ? 'alarm-clock-off' : 'clock'}" class="w-5 h-5"></i>
                     </div>
                   </div>
 
                   <!-- Detalles de Ruta y Mezcla -->
-                  <div class="grid grid-cols-2 gap-2 text-xs mb-3 text-[#555555]">
-                    <div><span class="text-[#777777]">Origen:</span> <strong class="text-[#111111]">${c.planta_origen}</strong></div>
-                    <div><span class="text-[#777777]">Destino:</span> <strong class="text-[#111111]">${c.obra_destino}</strong></div>
-                    <div><span class="text-[#777777]">Volumen:</span> <span class="font-mono text-[#0e2439] font-bold">${c.cantidad ? `${c.cantidad} ${c.unidad || ''}` : 'N/A'}</span></div>
-                    <div><span class="text-[#777777]">Diseño:</span> <span class="font-mono text-[#111111]">${c.diseno || (c.temperatura_c ? `${c.temperatura_c}°C` : 'N/A')}</span></div>
+                  <div class="grid grid-cols-2 gap-2 text-xs mb-3 text-[#475569]">
+                    <div><span class="text-[#64748b]">Origen:</span> <strong class="text-[#1e293b]">${c.planta_origen}</strong></div>
+                    <div><span class="text-[#64748b]">Destino:</span> <strong class="text-[#1e293b]">${c.obra_destino}</strong></div>
+                    <div><span class="text-[#64748b]">Volumen:</span> <span class="font-mono text-[#1e293b] font-bold">${c.cantidad ? `${c.cantidad} ${c.unidad || ''}` : 'N/A'}</span></div>
+                    <div><span class="text-[#64748b]">Diseño:</span> <span class="font-mono text-[#1e293b]">${c.diseno || (c.temperatura_c ? `${c.temperatura_c}°C` : 'N/A')}</span></div>
                   </div>
 
                   <!-- Ensayo de Laboratorio -->
-                  <div class="text-[11px] p-2.5 rounded border border-[#e8e6e1] bg-[#faf9f6]">
-                    <span class="text-[#777777]">Dictamen Laboratorio:</span>
+                  <div class="text-[11px] p-2.5 rounded border border-[#d4dfe8] bg-[#f8fafc]">
+                    <span class="text-[#64748b]">Dictamen Laboratorio:</span>
                     ${c.ensayo ? `
-                      <span class="font-semibold ${c.cumple_especificacion ? 'text-[#15803d]' : 'text-[#c62828]'} ml-1">
+                      <span class="font-semibold ${c.cumple_especificacion ? 'text-[#2b7a59]' : 'text-[#36536e]'} ml-1">
                         ${c.ensayo} (${c.cumple_especificacion ? 'CUMPLE' : 'NO CUMPLE - RETENER'})
                       </span>
                     ` : `
-                      <span class="text-[#777777] italic ml-1">Pendiente de ensayo</span>
+                      <span class="text-[#64748b] italic ml-1">Pendiente de ensayo</span>
                     `}
                   </div>
 
                 </div>
 
                 <!-- Botones Acciones -->
-                <div class="pt-3 border-t border-[#e8e6e1] mt-3 flex items-center gap-2">
+                <div class="pt-3 border-t border-[#d4dfe8] mt-3 flex items-center gap-2">
                   <button onclick="window.openQuickLabModal('${c.lote}', '${c.asset_identifier}')" class="gl-btn-black flex-1 text-center justify-center text-xs">
                     Dictaminar Lote
                   </button>
@@ -177,25 +173,25 @@ window.openDosificarModal = function() {
 
   modalContainer.innerHTML = `
     <div class="fixed inset-0 z-50 flex items-center justify-center modal-overlay p-4">
-      <div class="gl-card w-full max-w-lg p-6 sm:p-8 bg-white border border-[#e8e6e1] shadow-2xl max-h-[90vh] overflow-y-auto">
-        <div class="flex items-center justify-between border-b border-[#e8e6e1] pb-3 mb-4">
+      <div class="gl-card w-full max-w-lg p-6 sm:p-8 bg-white border border-[#d4dfe8] shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center justify-between border-b border-[#d4dfe8] pb-3 mb-4">
           <div class="flex items-center gap-2">
-            <i data-lucide="plus-circle" class="w-5 h-5 text-[#bf9410]"></i>
-            <h3 class="font-editorial-serif text-xl font-normal text-[#111111]">Dosificar Carga de Planta</h3>
+            <i data-lucide="plus-circle" class="w-5 h-5 text-[#2e5b82]"></i>
+            <h3 class="font-sans text-xl font-bold text-[#1e293b]">Dosificar Carga de Planta</h3>
           </div>
-          <button onclick="document.getElementById('modal-root').innerHTML = ''" class="text-[#777777] hover:text-[#111111]">
+          <button onclick="document.getElementById('modal-root').innerHTML = ''" class="text-[#64748b] hover:text-[#1e293b]">
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
 
-        <p class="text-xs text-[#555555] mb-4 leading-relaxed">
+        <p class="text-xs text-[#475569] mb-4 leading-relaxed">
           La planta dosifica y arranca el reloj de vida útil de la carga. Sincroniza automáticamente la veda del VMT y cuadrilla en destino.
         </p>
 
         <form id="form-dosificar" class="space-y-3 text-xs">
           <div>
-            <label class="block font-bold text-[#111111] mb-1">Tipo de Material:</label>
-            <select id="dos-tipo" class="w-full px-3 py-2 bg-white border border-[#d6d3cb] rounded text-[#111111]">
+            <label class="block font-bold text-[#1e293b] mb-1">Tipo de Material:</label>
+            <select id="dos-tipo" class="w-full px-3 py-2 bg-white border border-[#cbd5e1] rounded text-[#1e293b]">
               <option value="CONCRETO">CONCRETO (Reloj máx: 90 min)</option>
               <option value="ASFALTO">ASFALTO (Reloj máx: 120 min)</option>
               <option value="AGREGADO">AGREGADO</option>
@@ -204,8 +200,8 @@ window.openDosificarModal = function() {
 
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block font-bold text-[#111111] mb-1">Planta Origen:</label>
-              <select id="dos-origen" class="w-full px-3 py-2 bg-white border border-[#d6d3cb] rounded text-[#111111]">
+              <label class="block font-bold text-[#1e293b] mb-1">Planta Origen:</label>
+              <select id="dos-origen" class="w-full px-3 py-2 bg-white border border-[#cbd5e1] rounded text-[#1e293b]">
                 <option value="PCSS">PCSS - Planta Concreto San Salvador</option>
                 <option value="PCLL">PCLL - Planta Concreto La Libertad</option>
                 <option value="PCSO">PCSO - Planta Concreto Sonsonate</option>
@@ -215,8 +211,8 @@ window.openDosificarModal = function() {
               </select>
             </div>
             <div>
-              <label class="block font-bold text-[#111111] mb-1">Obra Destino:</label>
-              <select id="dos-destino" class="w-full px-3 py-2 bg-white border border-[#d6d3cb] rounded text-[#111111]">
+              <label class="block font-bold text-[#1e293b] mb-1">Obra Destino:</label>
+              <select id="dos-destino" class="w-full px-3 py-2 bg-white border border-[#cbd5e1] rounded text-[#1e293b]">
                 <option value="PDUT">PDUT - Paso Desnivel Utila</option>
                 <option value="PDCL">PDCL - Paso Desnivel Claudia Lars</option>
                 <option value="PDEJ">PDEJ - Paso Desnivel El Jaguar</option>
@@ -229,36 +225,36 @@ window.openDosificarModal = function() {
           </div>
 
           <div>
-            <label class="block font-bold text-[#111111] mb-1">Camión Hormigonera / Mixer:</label>
-            <input type="text" id="dos-asset" value="MACK-GU813-01" class="w-full px-3 py-2 bg-white border border-[#d6d3cb] rounded text-[#111111] font-mono uppercase" required>
+            <label class="block font-bold text-[#1e293b] mb-1">Camión Hormigonera / Mixer:</label>
+            <input type="text" id="dos-asset" value="MACK-GU813-01" class="w-full px-3 py-2 bg-white border border-[#cbd5e1] rounded text-[#1e293b] font-mono uppercase" required>
           </div>
 
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block font-bold text-[#111111] mb-1">Cantidad:</label>
-              <input type="number" step="0.1" id="dos-cantidad" value="8.0" class="w-full px-3 py-2 bg-white border border-[#d6d3cb] rounded text-[#111111]" required>
+              <label class="block font-bold text-[#1e293b] mb-1">Cantidad:</label>
+              <input type="number" step="0.1" id="dos-cantidad" value="8.0" class="w-full px-3 py-2 bg-white border border-[#cbd5e1] rounded text-[#1e293b]" required>
             </div>
             <div>
-              <label class="block font-bold text-[#111111] mb-1">Unidad:</label>
-              <input type="text" id="dos-unidad" value="m3" class="w-full px-3 py-2 bg-white border border-[#d6d3cb] rounded text-[#111111]">
+              <label class="block font-bold text-[#1e293b] mb-1">Unidad:</label>
+              <input type="text" id="dos-unidad" value="m3" class="w-full px-3 py-2 bg-white border border-[#cbd5e1] rounded text-[#1e293b]">
             </div>
           </div>
 
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block font-bold text-[#111111] mb-1">Diseño de Mezcla:</label>
-              <input type="text" id="dos-diseno" value="fc280" class="w-full px-3 py-2 bg-white border border-[#d6d3cb] rounded text-[#111111] font-mono">
+              <label class="block font-bold text-[#1e293b] mb-1">Diseño de Mezcla:</label>
+              <input type="text" id="dos-diseno" value="fc280" class="w-full px-3 py-2 bg-white border border-[#cbd5e1] rounded text-[#1e293b] font-mono">
             </div>
             <div>
-              <label class="block font-bold text-[#111111] mb-1">Temperatura inicial (°C):</label>
-              <input type="number" id="dos-temp" value="28" class="w-full px-3 py-2 bg-white border border-[#d6d3cb] rounded text-[#111111]">
+              <label class="block font-bold text-[#1e293b] mb-1">Temperatura inicial (°C):</label>
+              <input type="number" id="dos-temp" value="28" class="w-full px-3 py-2 bg-white border border-[#cbd5e1] rounded text-[#1e293b]">
             </div>
           </div>
 
-          <div class="flex justify-end gap-2.5 pt-4 border-t border-[#e8e6e1]">
+          <div class="flex justify-end gap-2.5 pt-4 border-t border-[#d4dfe8]">
             <button type="button" onclick="document.getElementById('modal-root').innerHTML = ''" class="gl-btn-outline">Cancelar</button>
             <button type="submit" class="gl-btn-black">
-              <i data-lucide="play" class="w-4 h-4 text-[#bf9410]"></i>
+              <i data-lucide="play" class="w-4 h-4 text-[#2e5b82]"></i>
               <span>Iniciar Despacho</span>
             </button>
           </div>
@@ -287,7 +283,7 @@ window.openDosificarModal = function() {
     const submitBtn = form.querySelector('button[type="submit"]');
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin text-[#bf9410]"></i><span>Dosificando en Planta...</span>`;
+      submitBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin text-[#2e5b82]"></i><span>Dosificando en Planta...</span>`;
       if (window.lucide) window.lucide.createIcons({ root: submitBtn });
     }
 
@@ -302,7 +298,7 @@ window.openDosificarModal = function() {
       if (window.showToast) window.showToast(`Error al dosificar: ${err.message}`, 'error');
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = `<i data-lucide="play" class="w-4 h-4 text-[#bf9410]"></i><span>Iniciar Despacho</span>`;
+        submitBtn.innerHTML = `<i data-lucide="play" class="w-4 h-4 text-[#2e5b82]"></i><span>Iniciar Despacho</span>`;
         if (window.lucide) window.lucide.createIcons({ root: submitBtn });
       }
     }
@@ -316,44 +312,44 @@ window.openQuickLabModal = function(lote = '', assetId = '') {
 
   modalContainer.innerHTML = `
     <div class="fixed inset-0 z-50 flex items-center justify-center modal-overlay p-4">
-      <div class="gl-card w-full max-w-md p-6 sm:p-8 bg-white border border-[#e8e6e1] shadow-2xl">
-        <div class="flex items-center justify-between border-b border-[#e8e6e1] pb-3 mb-4">
+      <div class="gl-card w-full max-w-md p-6 sm:p-8 bg-white border border-[#d4dfe8] shadow-2xl">
+        <div class="flex items-center justify-between border-b border-[#d4dfe8] pb-3 mb-4">
           <div class="flex items-center gap-2">
-            <i data-lucide="flask-conical" class="w-5 h-5 text-[#bf9410]"></i>
-            <h3 class="font-editorial-serif text-xl font-normal text-[#111111]">Dictamen de Laboratorio</h3>
+            <i data-lucide="flask-conical" class="w-5 h-5 text-[#2e5b82]"></i>
+            <h3 class="font-sans text-xl font-bold text-[#1e293b]">Dictamen de Laboratorio</h3>
           </div>
-          <button onclick="document.getElementById('modal-root').innerHTML = ''" class="text-[#777777] hover:text-[#111111]">
+          <button onclick="document.getElementById('modal-root').innerHTML = ''" class="text-[#64748b] hover:text-[#1e293b]">
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
 
-        <p class="text-xs text-[#555555] mb-4 leading-relaxed">
+        <p class="text-xs text-[#475569] mb-4 leading-relaxed">
           El laboratorio es el custodio de la especificación técnica. Si el lote no cumple, el Hub lo retiene automáticamente antes de vertido en obra.
         </p>
 
         <form id="form-dictamen-lab" class="space-y-4 text-xs">
           <div>
-            <label class="block font-bold text-[#111111] mb-1">Código de Lote:</label>
-            <input type="text" id="lab-lote" value="${lote}" placeholder="C-SMOKE-..." class="w-full px-3 py-2 bg-white border border-[#d6d3cb] rounded text-[#111111] font-mono" required>
+            <label class="block font-bold text-[#1e293b] mb-1">Código de Lote:</label>
+            <input type="text" id="lab-lote" value="${lote}" placeholder="C-SMOKE-..." class="w-full px-3 py-2 bg-white border border-[#cbd5e1] rounded text-[#1e293b] font-mono" required>
           </div>
 
           <div>
-            <label class="block font-bold text-[#111111] mb-1">Descripción del Ensayo:</label>
-            <input type="text" id="lab-ensayo" value="compresión 7 días 280 kg/cm2" class="w-full px-3 py-2 bg-white border border-[#d6d3cb] rounded text-[#111111]" required>
+            <label class="block font-bold text-[#1e293b] mb-1">Descripción del Ensayo:</label>
+            <input type="text" id="lab-ensayo" value="compresión 7 días 280 kg/cm2" class="w-full px-3 py-2 bg-white border border-[#cbd5e1] rounded text-[#1e293b]" required>
           </div>
 
-          <div class="p-3.5 rounded border border-[#e8e6e1] bg-[#faf9f6] flex items-center justify-between">
+          <div class="p-3.5 rounded border border-[#d4dfe8] bg-[#f8fafc] flex items-center justify-between">
             <div>
-              <span class="font-bold text-[#111111] block">¿Cumple Especificación?</span>
-              <span class="text-[11px] text-[#666666]">Desmarcar para activar retención inmediata</span>
+              <span class="font-bold text-[#1e293b] block">¿Cumple Especificación?</span>
+              <span class="text-[11px] text-[#64748b]">Desmarcar para activar retención inmediata</span>
             </div>
-            <input type="checkbox" id="lab-cumple" class="w-5 h-5 accent-[#bf9410]" checked>
+            <input type="checkbox" id="lab-cumple" class="w-5 h-5 accent-[#2e5b82]" checked>
           </div>
 
-          <div class="flex justify-end gap-2.5 pt-3 border-t border-[#e8e6e1]">
+          <div class="flex justify-end gap-2.5 pt-3 border-t border-[#d4dfe8]">
             <button type="button" onclick="document.getElementById('modal-root').innerHTML = ''" class="gl-btn-outline">Cancelar</button>
             <button type="submit" class="gl-btn-black">
-              <i data-lucide="check" class="w-4 h-4 text-[#bf9410]"></i>
+              <i data-lucide="check" class="w-4 h-4 text-[#2e5b82]"></i>
               <span>Guardar Dictamen</span>
             </button>
           </div>
@@ -378,7 +374,7 @@ window.openQuickLabModal = function(lote = '', assetId = '') {
     const submitBtn = form.querySelector('button[type="submit"]');
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin text-[#bf9410]"></i><span>Guardando Ensayo...</span>`;
+      submitBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin text-[#2e5b82]"></i><span>Guardando Ensayo...</span>`;
       if (window.lucide) window.lucide.createIcons({ root: submitBtn });
     }
 
@@ -394,7 +390,7 @@ window.openQuickLabModal = function(lote = '', assetId = '') {
       if (window.showToast) window.showToast(`Error al registrar ensayo: ${err.message}`, 'error');
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = `<i data-lucide="check" class="w-4 h-4 text-[#bf9410]"></i><span>Guardar Dictamen</span>`;
+        submitBtn.innerHTML = `<i data-lucide="check" class="w-4 h-4 text-[#2e5b82]"></i><span>Guardar Dictamen</span>`;
         if (window.lucide) window.lucide.createIcons({ root: submitBtn });
       }
     }

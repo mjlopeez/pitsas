@@ -1,5 +1,5 @@
-// Componente Header Dinámico con Estética Editorial Goodlife El Salvador
-// Fondo blanco puro, tipografía serif clásica, acabados humanos y cero AI slop
+// Componente Header Dinámico con Estética Azul Frío Pizarra & Acero
+// Amigable, ergonómico, sin AI slop, optimizado para móvil y escritorio
 
 let isMenuDeployed = false;
 
@@ -20,27 +20,27 @@ function renderHeader(container) {
   const currentMeta = MODULES_LIST.find(m => m.key === activeTabKey) || MODULES_LIST[0];
 
   container.innerHTML = `
-    <header id="main-header" class="relative border-b border-[#e8e6e1] bg-white sticky top-0 z-40 transition-all">
+    <header id="main-header" class="relative border-b border-[#d4dfe8] bg-white sticky top-0 z-40 transition-all">
       
       <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16 sm:h-18 gap-2">
           
-          <!-- Logo & Brand Editorial Goodlife -->
+          <!-- Logo & Brand Grupo ECON -->
           <div class="flex items-center gap-3 cursor-pointer group" onclick="window.toggleModuleMenu()" title="Ver módulos de operación">
-            <div class="w-10 h-10 rounded bg-[#f4f3f0] border border-[#d6d3cb] flex items-center justify-center text-[#111111] group-hover:border-[#bf9410] transition-colors shrink-0">
-              <i data-lucide="shield" class="w-5 h-5 text-[#bf9410]"></i>
+            <div class="w-10 h-10 rounded-lg bg-[#eef4f9] border border-[#cbd5e1] flex items-center justify-center text-[#2e5b82] group-hover:border-[#2e5b82] transition-colors shrink-0">
+              <i data-lucide="shield" class="w-5 h-5 text-[#2e5b82]"></i>
             </div>
 
             <div>
               <div class="flex items-center gap-2">
-                <span class="font-editorial-serif text-xl sm:text-2xl font-normal tracking-wide text-[#111111]">
+                <span class="font-sans text-xl sm:text-2xl font-bold tracking-tight text-[#1e293b]">
                   GRUPO ECON
                 </span>
-                <span class="hidden sm:inline-block px-1.5 py-0.2 text-[9px] font-bold font-sans tracking-widest uppercase rounded bg-[#f4f3f0] text-[#555555] border border-[#e8e6e1]">
+                <span class="hidden sm:inline-block px-1.5 py-0.2 text-[9px] font-bold font-sans tracking-widest uppercase rounded bg-[#f1f5f9] text-[#475569] border border-[#cbd5e1]">
                   El Salvador
                 </span>
               </div>
-              <span class="gl-subtitle text-[9px] sm:text-[10px] text-[#bf9410] block -mt-0.5">
+              <span class="gl-subtitle text-[9px] sm:text-[10px] text-[#2e5b82] block -mt-0.5">
                 HUB DE OPERACIONES & FLOTA
               </span>
             </div>
@@ -48,17 +48,17 @@ function renderHeader(container) {
 
           <!-- Métricas Resumen Centrales (Escritorio) -->
           <div class="hidden lg:flex items-center gap-3 text-xs">
-            <div class="px-3 py-1.5 rounded bg-[#f8f8f6] border border-[#e8e6e1] flex items-center gap-2">
-              <span class="text-[#777777] text-[11px] uppercase tracking-wider font-semibold">Flota:</span>
-              <span class="font-bold text-[#111111] font-mono">${state.assets.length || state.health.activos || 0} maq</span>
+            <div class="px-3 py-1.5 rounded-lg bg-[#f8fafc] border border-[#d4dfe8] flex items-center gap-2">
+              <span class="text-[#64748b] text-[11px] uppercase tracking-wider font-semibold">Flota:</span>
+              <span class="font-bold text-[#1e293b] font-mono">${state.assets.length || state.health.activos || 0} maq</span>
             </div>
-            <div class="px-3 py-1.5 rounded bg-[#f8f8f6] border border-[#e8e6e1] flex items-center gap-2">
-              <span class="text-[#777777] text-[11px] uppercase tracking-wider font-semibold">Cargas Concreto:</span>
-              <span class="font-bold text-[#111111] font-mono">${state.cargas.length || 0}</span>
+            <div class="px-3 py-1.5 rounded-lg bg-[#f8fafc] border border-[#d4dfe8] flex items-center gap-2">
+              <span class="text-[#64748b] text-[11px] uppercase tracking-wider font-semibold">Cargas Concreto:</span>
+              <span class="font-bold text-[#1e293b] font-mono">${state.cargas.length || 0}</span>
             </div>
-            <div class="px-3 py-1.5 rounded bg-[#f8f8f6] border border-[#e8e6e1] flex items-center gap-2">
-              <span class="text-[#777777] text-[11px] uppercase tracking-wider font-semibold">Alertas:</span>
-              <span class="font-bold font-mono ${state.alerts.length > 0 ? 'text-[#c62828]' : 'text-[#15803d]'}">
+            <div class="px-3 py-1.5 rounded-lg bg-[#f8fafc] border border-[#d4dfe8] flex items-center gap-2">
+              <span class="text-[#64748b] text-[11px] uppercase tracking-wider font-semibold">Alertas:</span>
+              <span class="font-bold font-mono ${state.alerts.length > 0 ? 'text-[#a33d3d]' : 'text-[#2b7a59]'}">
                 ${state.alerts.length || state.health.alertas_abiertas || 0}
               </span>
             </div>
@@ -67,34 +67,34 @@ function renderHeader(container) {
           <!-- Controles del Lado Derecho: Selector de Módulo, Estado API y Refresco -->
           <div class="flex items-center gap-2">
             
-            <!-- Selector de Módulo (Botón táctil elegante) -->
+            <!-- Selector de Módulo -->
             <button 
               id="btn-toggle-menu" 
               onclick="window.toggleModuleMenu()" 
               title="Abrir menú de módulos" 
-              class="px-3 sm:px-4 py-2 rounded border transition-all flex items-center gap-2 cursor-pointer min-h-[42px] ${
+              class="px-3 sm:px-4 py-2 rounded-lg border transition-all flex items-center gap-2 cursor-pointer min-h-[42px] ${
                 isMenuDeployed 
-                  ? 'bg-[#111111] border-[#111111] text-white shadow-sm' 
-                  : 'bg-white border-[#d6d3cb] hover:border-[#111111] text-[#111111]'
+                  ? 'bg-[#1e293b] border-[#1e293b] text-white shadow-sm' 
+                  : 'bg-white border-[#cbd5e1] hover:border-[#1e293b] text-[#1e293b]'
               }"
             >
-              <i data-lucide="${currentMeta.icon}" class="w-4 h-4 ${isMenuDeployed ? 'text-[#bf9410]' : 'text-[#111111]'}"></i>
+              <i data-lucide="${currentMeta.icon}" class="w-4 h-4 ${isMenuDeployed ? 'text-[#9ec1dc]' : 'text-[#2e5b82]'}"></i>
               <div class="text-left">
-                <span class="text-[9px] uppercase tracking-wider text-[#777777] font-bold block sm:hidden">Módulo</span>
-                <span class="font-bold text-xs max-w-[120px] sm:max-w-none truncate block ${isMenuDeployed ? 'text-white' : 'text-[#111111]'}">
+                <span class="text-[9px] uppercase tracking-wider text-[#64748b] font-bold block sm:hidden">Módulo</span>
+                <span class="font-bold text-xs max-w-[120px] sm:max-w-none truncate block ${isMenuDeployed ? 'text-white' : 'text-[#1e293b]'}">
                   ${currentMeta.name}
                 </span>
               </div>
-              <i data-lucide="chevron-down" id="menu-icon" class="w-3.5 h-3.5 transition-transform duration-200 ml-0.5 ${isMenuDeployed ? 'rotate-180 text-[#bf9410]' : 'text-[#777777]'}"></i>
+              <i data-lucide="chevron-down" id="menu-icon" class="w-3.5 h-3.5 transition-transform duration-200 ml-0.5 ${isMenuDeployed ? 'rotate-180 text-[#9ec1dc]' : 'text-[#64748b]'}"></i>
             </button>
 
             <!-- Indicador Visual de API Backend (Solo Lectura) -->
             <div 
-              title="${isOnline ? 'API Backend en línea: ebook-shun-moonwalk.ngrok-free.dev' : 'API Backend Desconectada'}" 
-              class="flex items-center gap-1.5 px-3 py-1.5 rounded border text-xs font-semibold select-none min-h-[42px] ${
+              title="${isOnline ? 'API Backend en línea' : 'API Backend Desconectada'}" 
+              class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold select-none min-h-[42px] ${
                 isOnline 
-                  ? 'bg-emerald-50 border-emerald-300 text-emerald-800' 
-                  : 'bg-rose-50 border-rose-300 text-rose-800'
+                  ? 'bg-[#edf7f2] border-[#bfe5d3] text-[#2b7a59]' 
+                  : 'bg-[#fdf2f2] border-[#f7caca] text-[#a33d3d]'
               }"
             >
               <span class="w-2 h-2 rounded-full ${isOnline ? 'bg-emerald-500' : 'bg-rose-500'} shrink-0"></span>
@@ -105,9 +105,9 @@ function renderHeader(container) {
             <button 
               onclick="window.refreshAllData()" 
               title="Sincronizar datos con la API" 
-              class="w-10 h-10 rounded bg-white hover:bg-[#f4f3f0] border border-[#d6d3cb] text-[#333333] hover:text-[#111111] flex items-center justify-center transition-colors shrink-0 min-h-[42px]"
+              class="w-10 h-10 rounded-lg bg-white hover:bg-[#f1f5f9] border border-[#cbd5e1] text-[#334155] hover:text-[#1e293b] flex items-center justify-center transition-colors shrink-0 min-h-[42px]"
             >
-              <i data-lucide="refresh-cw" class="w-4 h-4 ${state.isLoading ? 'animate-spin text-[#bf9410]' : ''}"></i>
+              <i data-lucide="refresh-cw" class="w-4 h-4 ${state.isLoading ? 'animate-spin text-[#2e5b82]' : ''}"></i>
             </button>
 
           </div>
@@ -115,18 +115,18 @@ function renderHeader(container) {
         </div>
       </div>
 
-      <!-- Menú Desplegable de Módulos (Drawer Editorial Limpio) -->
-      <div id="module-drawer" class="gl-drawer ${isMenuDeployed ? 'open' : ''} border-t border-[#e8e6e1] bg-white shadow-xl">
+      <!-- Menú Desplegable de Módulos (Drawer Limpio) -->
+      <div id="module-drawer" class="gl-drawer ${isMenuDeployed ? 'open' : ''} border-t border-[#d4dfe8] bg-white shadow-lg">
         <div class="max-w-7xl mx-auto px-4 py-6">
           
-          <div class="flex items-center justify-between pb-3 mb-4 border-b border-[#e8e6e1]">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-[#d4dfe8]">
             <div>
-              <span class="gl-subtitle block">CATÁLOGO DE OPERACIONES</span>
-              <h3 class="font-editorial-serif text-xl font-normal text-[#111111]">Módulos del Hub de Operaciones</h3>
+              <span class="gl-subtitle block text-[#2e5b82]">CATÁLOGO DE OPERACIONES</span>
+              <h3 class="font-sans text-xl font-bold text-[#1e293b]">Módulos del Hub de Operaciones</h3>
             </div>
             <button 
               onclick="window.toggleModuleMenu(false)" 
-              class="p-2 rounded text-[#777777] hover:text-[#111111] hover:bg-[#f4f3f0] text-xs flex items-center gap-1 font-semibold"
+              class="p-2 rounded-lg text-[#64748b] hover:text-[#1e293b] hover:bg-[#f1f5f9] text-xs flex items-center gap-1 font-semibold"
             >
               <i data-lucide="x" class="w-4 h-4"></i>
               <span class="hidden sm:inline">Cerrar</span>
@@ -140,23 +140,23 @@ function renderHeader(container) {
               return `
                 <div 
                   onclick="window.selectModule('${m.key}')" 
-                  class="p-3.5 rounded border transition-all cursor-pointer flex items-start gap-3 select-none ${
+                  class="p-3.5 rounded-lg border transition-all cursor-pointer flex items-start gap-3 select-none ${
                     isSelected 
-                      ? 'bg-[#fdfaf0] border-[#ecd99a] text-[#111111] shadow-sm' 
-                      : 'bg-[#faf9f6] border-[#e8e6e1] hover:border-[#111111] hover:bg-white text-[#333333]'
+                      ? 'bg-[#eef4f9] border-[#9ec1dc] text-[#1e293b] shadow-sm' 
+                      : 'bg-[#f8fafc] border-[#d4dfe8] hover:border-[#9ec1dc] hover:bg-white text-[#334155]'
                   }"
                 >
-                  <div class="w-9 h-9 rounded flex items-center justify-center shrink-0 ${
-                    isSelected ? 'bg-[#bf9410] text-white font-bold' : 'bg-white border border-[#d6d3cb] text-[#111111]'
+                  <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${
+                    isSelected ? 'bg-[#2e5b82] text-white font-bold' : 'bg-white border border-[#cbd5e1] text-[#2e5b82]'
                   }">
                     <i data-lucide="${m.icon}" class="w-4 h-4"></i>
                   </div>
                   <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between gap-1">
-                      <span class="font-bold text-xs text-[#111111] truncate">${m.name}</span>
-                      ${isSelected ? '<span class="text-[9px] font-bold text-[#bf9410] uppercase font-mono">Activo</span>' : ''}
+                      <span class="font-bold text-xs text-[#1e293b] truncate">${m.name}</span>
+                      ${isSelected ? '<span class="text-[9px] font-bold text-[#2e5b82] uppercase font-mono">Activo</span>' : ''}
                     </div>
-                    <p class="text-[11px] text-[#666666] leading-tight mt-0.5 truncate">${m.desc}</p>
+                    <p class="text-[11px] text-[#64748b] leading-tight mt-0.5 truncate">${m.desc}</p>
                   </div>
                 </div>
               `;
