@@ -27,7 +27,7 @@ async function renderReconciliation(container) {
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <span class="gl-subtitle text-[#2e5b82] block mb-1">AUDITORÍA CONTINUA DE SILOS • GRUPO ECON</span>
-            <h2 class="font-sans text-2xl sm:text-3xl font-bold text-[#1e293b] tracking-tight tracking-wide">
+            <h2 class="font-sans text-2xl sm:text-3xl font-bold text-[#1e293b] tracking-tight">
               Conciliación Nexus vs Startrack & Auditoría PEA
             </h2>
             <div class="gl-separator justify-start my-2"></div>

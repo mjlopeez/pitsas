@@ -1,29 +1,31 @@
 /* Command Center — Hub de Operaciones ECON
-   Paleta: basalto volcanico + naranja de senializacion vial.
-   Duenio: Majo. Es un tablero de operaciones: se escanea, no se lee. */
+   Paleta: Azul Frío Pizarra & Acero (Cold Slate & Steel Blue)
+   - Amigable, humano, sobrio y de grado de ingeniería (Cero AI Slop)
+   - Proporcional: pizarra oscuro (#0b131b, #131c26, #1b2633), bordes nítidos (#293848) y acento acero frío (#38719f) */
 
 :root {
-  --bg: #0e1317;
-  --panel: #161d23;
-  --panel-2: #1d262d;
-  --line: #2a353d;
-  --ink: #e7ebe8;
-  --ink-2: #a8b4bd;
-  --muted: #71808b;
-  --acento: #e8763c;
-  --ok: #3fa877;
-  --warn: #d1a038;
-  --crit: #e0685c;
-  --mant: #9b7fd4;
-  --tras: #4e9fd1;
-  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bg: #0b131b;
+  --panel: #131c26;
+  --panel-2: #1b2633;
+  --line: #293848;
+  --ink: #f0f4f8;
+  --ink-2: #cbd5e1;
+  --muted: #798d9f;
+  --acento: #38719f;
+  --acento-hover: #2e5b82;
+  --ok: #2b7a59;
+  --warn: #c28830;
+  --crit: #a33d3d;
+  --mant: #64748b;
+  --tras: #437aa7;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; margin: 0; }
 body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 14px; }
-button, select, input { font-family: inherit; font-size: inherit; }
+button, select, input { font-family: inherit; font-size: inherit; border-radius: 6px; }
 
 .app { display: flex; flex-direction: column; height: 100%; }
 
@@ -153,8 +155,8 @@ main { display: grid; grid-template-columns: 1fr 440px; flex: 1; min-height: 0; 
 .alertas-ficha li span { color: var(--ink-2); font-size: 11.5px; }
 
 .btn {
-  margin-top: 13px; width: 100%; padding: 9px; background: var(--acento); color: #14100c;
-  border: 0; font-weight: 600; cursor: pointer; letter-spacing: 0.01em;
+  margin-top: 13px; width: 100%; padding: 9px; background: var(--acento); color: #ffffff;
+  border: 0; font-weight: 600; cursor: pointer; border-radius: 6px; letter-spacing: 0.01em;
 }
 .btn:hover:not(:disabled) { filter: brightness(1.1); }
 .btn:disabled { background: var(--panel-2); color: var(--muted); cursor: not-allowed; }
@@ -207,7 +209,7 @@ main { display: grid; grid-template-columns: 1fr 440px; flex: 1; min-height: 0; 
 .linea { position: relative; height: 46px; background: var(--panel-2); border: 1px solid var(--line); }
 .linea .veda { position: absolute; top: 0; bottom: 16px; background: rgba(224,104,92,0.28); border-left: 1px solid var(--crit); border-right: 1px solid var(--crit); }
 .linea .viaje { position: absolute; top: 6px; height: 16px; background: var(--acento); }
-.linea .viaje span { position: absolute; left: 3px; top: 1px; font-family: var(--mono); font-size: 9px; color: #14100c; }
+.linea .viaje span { position: absolute; left: 3px; top: 1px; font-family: var(--mono); font-size: 9px; color: #ffffff; }
 .linea .tick { position: absolute; bottom: 0; height: 16px; border-left: 1px solid var(--line); }
 .linea .tick b { position: absolute; left: 2px; bottom: 1px; font-family: var(--mono); font-size: 9px; color: var(--muted); font-weight: 400; }
 
@@ -478,8 +480,9 @@ main { display: grid; grid-template-columns: 1fr 440px; flex: 1; min-height: 0; 
   color: var(--ink); padding: 7px 9px; font-family: inherit; font-size: 12px;
 }
 .pea button {
-  background: var(--acento); border: 0; color: #1a0d06; font-weight: 600;
+  background: var(--acento); border: 0; color: #ffffff; font-weight: 600;
   padding: 7px 12px; cursor: pointer; font-family: inherit; font-size: 12px; flex: none;
+  border-radius: 6px;
 }
 .pea button:disabled { opacity: 0.5; cursor: default; }
 .pea-error { margin: 7px 0 0; font-size: 11.5px; color: var(--crit); }

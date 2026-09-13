@@ -11,13 +11,51 @@ function renderConnectors(container) {
       <!-- Encabezado Editorial de Conectores -->
       <div class="gl-card p-6 sm:p-8 bg-white border border-[#d4dfe8]">
         <span class="gl-subtitle text-[#2e5b82] block mb-1">ARQUITECTURA DE INGESTA CANÓNICA • ISO 15143-3</span>
-        <h2 class="font-sans text-2xl sm:text-3xl font-bold text-[#1e293b] tracking-tight tracking-wide">
+        <h2 class="font-sans text-2xl sm:text-3xl font-bold text-[#1e293b] tracking-tight">
           Panel de Conectores & Normalización de Telemetría
         </h2>
         <div class="gl-separator justify-start my-2"></div>
         <p class="text-xs sm:text-sm text-[#475569] max-w-3xl leading-relaxed">
           El Hub normaliza múltiples formatos telemáticos propietarios hacia el contrato estándar ISO 15143-3 (AEMP 2.0). Si un payload no cumple las reglas, se rechaza visiblemente para garantizar la integridad de auditoría de Grupo ECON.
         </p>
+      </div>
+
+      <!-- Sincronización de Tareas y Geocercas Startrack -->
+      <div class="gl-card p-6 sm:p-8 bg-white border border-[#d4dfe8]">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-[#d4dfe8]">
+          <div>
+            <span class="gl-subtitle text-[#2e5b82] block mb-0.5">SINCRONIZACIÓN EN VIVO</span>
+            <h3 class="font-sans text-lg font-bold text-[#1e293b]">Sincronización Directa con Startrack</h3>
+            <p class="text-xs text-[#475569] mt-0.5">
+              Refresca estados de tareas (roles de flujo de trabajo) y catálogo de geocercas POI contra el API de campo.
+            </p>
+          </div>
+          <i data-lucide="refresh-cw" class="w-6 h-6 text-[#2e5b82]"></i>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 rounded-lg border border-[#d4dfe8] bg-[#f8fafc] flex flex-col justify-between">
+            <div>
+              <strong class="text-[#1e293b] block mb-1">Actualizar Tareas & Roles</strong>
+              <p class="text-[#64748b] text-[11px] mb-3">Consulta /api/job para traducir status a workflow_role y actualizar ps_tareas.</p>
+            </div>
+            <button id="btn-sync-tareas" class="gl-btn-primary w-full justify-center">
+              <i data-lucide="check-square" class="w-4 h-4"></i>
+              <span>Sincronizar Tareas</span>
+            </button>
+          </div>
+
+          <div class="p-4 rounded-lg border border-[#d4dfe8] bg-[#f8fafc] flex flex-col justify-between">
+            <div>
+              <strong class="text-[#1e293b] block mb-1">Actualizar Geocercas (POIs)</strong>
+              <p class="text-[#64748b] text-[11px] mb-3">Consulta /api/pois de Startrack e inserta o actualiza coordenadas en ps_geocercas.</p>
+            </div>
+            <button id="btn-sync-geocercas" class="gl-btn-primary w-full justify-center">
+              <i data-lucide="map-pin" class="w-4 h-4"></i>
+              <span>Sincronizar Geocercas</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- Tabla de Salud de Conectores -->
@@ -120,6 +158,50 @@ function renderConnectors(container) {
 
   const btnGen = container.querySelector('#btn-generate-synthetic');
   const btnClean = container.querySelector('#btn-clean-synthetic');
+  const btnSyncTareas = container.querySelector('#btn-sync-tareas');
+  const btnSyncGeocercas = container.querySelector('#btn-sync-geocercas');
+
+  if (btnSyncTareas) {
+    btnSyncTareas.addEventListener('click', async () => {
+      if (navigator.vibrate) navigator.vibrate(20);
+      btnSyncTareas.disabled = true;
+      btnSyncTareas.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i><span>Sincronizando...</span>`;
+      if (window.lucide) window.lucide.createIcons({ root: btnSyncTareas });
+      try {
+        const res = await window.apiClient.syncTareas();
+        const msg = res.ok ? `Tareas sincronizadas: ${res.actualizadas || 0} actualizadas` : `Aviso: ${res.motivo || 'Verifique conexión'}`;
+        if (window.showToast) window.showToast(`POST /admin/sync-tareas: 200 OK — ${msg}`, res.ok ? 'success' : 'info');
+        window.appStore.refreshAll();
+      } catch (err) {
+        if (window.showToast) window.showToast(`Error sincronizando tareas: ${err.message}`, 'error');
+      } finally {
+        btnSyncTareas.disabled = false;
+        btnSyncTareas.innerHTML = `<i data-lucide="check-square" class="w-4 h-4"></i><span>Sincronizar Tareas</span>`;
+        if (window.lucide) window.lucide.createIcons({ root: btnSyncTareas });
+      }
+    });
+  }
+
+  if (btnSyncGeocercas) {
+    btnSyncGeocercas.addEventListener('click', async () => {
+      if (navigator.vibrate) navigator.vibrate(20);
+      btnSyncGeocercas.disabled = true;
+      btnSyncGeocercas.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i><span>Sincronizando...</span>`;
+      if (window.lucide) window.lucide.createIcons({ root: btnSyncGeocercas });
+      try {
+        const res = await window.apiClient.syncGeocercas();
+        const msg = res.ok ? `Geocercas sincronizadas: ${res.geocercas_totales || res.escritas || 0} totales` : `Aviso: ${res.motivo || 'Verifique conexión'}`;
+        if (window.showToast) window.showToast(`POST /admin/sync-geocercas: 200 OK — ${msg}`, res.ok ? 'success' : 'info');
+        window.appStore.refreshAll();
+      } catch (err) {
+        if (window.showToast) window.showToast(`Error sincronizando geocercas: ${err.message}`, 'error');
+      } finally {
+        btnSyncGeocercas.disabled = false;
+        btnSyncGeocercas.innerHTML = `<i data-lucide="map-pin" class="w-4 h-4"></i><span>Sincronizar Geocercas</span>`;
+        if (window.lucide) window.lucide.createIcons({ root: btnSyncGeocercas });
+      }
+    });
+  }
 
   if (btnGen) {
     btnGen.addEventListener('click', async () => {

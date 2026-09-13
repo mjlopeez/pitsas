@@ -57,7 +57,7 @@ function renderNexusMock(container) {
             <span class="gl-subtitle text-[#364663] block mb-1">
               GESTIÓN FINANCIERA & COSTOS DE CONSTRUCCIÓN
             </span>
-            <h2 class="font-sans text-2xl sm:text-3xl font-bold text-[#1e293b] tracking-tight tracking-wide">
+            <h2 class="font-sans text-2xl sm:text-3xl font-bold text-[#1e293b] tracking-tight">
               Nexus ERP Construcción
             </h2>
             <div class="gl-separator justify-start my-2"></div>

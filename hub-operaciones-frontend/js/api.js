@@ -230,6 +230,14 @@ class ApiClient {
   sendStartrackAlerta(payload) {
     return this.request(window.ECON_CONFIG.ENDPOINTS.startrackAlertas, { method: 'POST', body: payload });
   }
+
+  syncTareas() {
+    return this.request(window.ECON_CONFIG.ENDPOINTS.adminSyncTareas, { method: 'POST' });
+  }
+
+  syncGeocercas() {
+    return this.request(window.ECON_CONFIG.ENDPOINTS.adminSyncGeocercas, { method: 'POST' });
+  }
 }
 
 window.apiClient = new ApiClient();
