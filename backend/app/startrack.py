@@ -30,7 +30,7 @@ import time
 from datetime import date, datetime, timedelta, timezone
 from typing import Any
 
-from .db import q, x
+from .db import q, q1, x
 
 TIMEOUT = float(os.getenv("STARTRACK_TIMEOUT", "15"))
 
@@ -77,10 +77,10 @@ def _get(ruta: str, params: dict[str, Any] | None = None) -> dict[str, Any] | No
         return None
 
 
-_roles: dict[str, str] | None = None
+_roles: dict[str, tuple[str, str]] | None = None
 
 
-def catalogo_estados_tarea() -> dict[str, str]:
+def catalogo_estados_tarea() -> dict[str, tuple[str, str]]:
     """Mapa `status id -> workflow_role`, cacheado.
 
     Es el catalogo que vuelve innecesario adivinar por el nombre del estado:
@@ -91,7 +91,7 @@ def catalogo_estados_tarea() -> dict[str, str]:
     if _roles is not None:
         return _roles
     data = _get("job/status") or {}
-    _roles = {str(e.get("id")): str(e.get("workflow_role"))
+    _roles = {str(e.get("id")): (str(e.get("workflow_role")), str(e.get("name") or ""))
               for e in (data.get("data") or []) if e.get("id") is not None}
     return _roles
 
@@ -176,6 +176,122 @@ def _codigo_en(texto: str | None) -> str:
     return (texto or "").strip().upper()
 
 
+def geocercas(page_size: int = 500) -> list[dict[str, Any]]:
+    """GET /api/pois — el universo de destinos posibles.
+
+    `poi_name` de una tarea apunta a uno de estos nombres, asi que sin esto
+    una geocerca creada despues de la semilla no existe para el Hub.
+    """
+    d = _get("pois", {"page_size": page_size})
+    return (d or {}).get("data") or []
+
+
+def sincronizar_geocercas() -> dict[str, Any]:
+    """Refresca ps_geocercas desde Startrack. UPSERT, no borra la semilla."""
+    if not disponible():
+        return {"ok": False, "motivo": "sin credenciales de Startrack",
+                "origen": "semilla"}
+    pois = geocercas()
+    if not pois:
+        return {"ok": False, "motivo": "/api/pois no devolvio geocercas",
+                "origen": "semilla"}
+
+    escritas = 0
+    for p_ in pois:
+        pid = str(p_.get("id") or "")
+        nombre = p_.get("name")
+        # y = latitud, x = longitud. Mismo criterio que fleet/status.
+        lat, lon = _real(p_.get("y")), _real(p_.get("x"))
+        if not pid or not nombre or lat is None or lon is None:
+            continue
+        x("INSERT OR REPLACE INTO ps_geocercas"
+          " (poi_id, nombre, lat, lon, radio_m, grupo, direccion)"
+          " VALUES (?,?,?,?,?,?,?)",
+          (pid, nombre, lat, lon, _real(p_.get("radius")),
+           p_.get("poi_group_name"), p_.get("address")))
+        escritas += 1
+
+    total = (q1("SELECT COUNT(*) AS n FROM ps_geocercas") or {"n": 0})["n"]
+    return {"ok": True, "origen": "startrack", "escritas": escritas,
+            "geocercas_totales": total}
+
+
+def sincronizar_tareas() -> dict[str, Any]:
+    """Refresca el ESTADO de las tareas: workflow_role y nombre del estado.
+
+    Va aparte de `sincronizar()` a proposito, por dos razones:
+
+    1. `sincronizar()` presume — y lo verifica `scripts/prueba_startrack.py` —
+       de resolver toda la flota en UNA sola peticion a /api/fleet/status.
+       Meter /api/job aqui adentro haria falsa esa afirmacion.
+    2. Son fallos independientes: si /api/job no responde, preferimos posicion
+       y horometro actualizados con estado viejo, antes que no actualizar nada.
+
+    Sin esto, `workflow_role` se quedaba con el valor de la SEMILLA para
+    siempre: una tarea ya cerrada en Startrack seguiria contando como viva y
+    el Hub podria mostrar riesgo_critico sobre algo ya resuelto — justo lo
+    contrario de lo que decimos en el pitch.
+
+    `status` del Job es el ID del estado; el catalogo lo traduce a
+    (workflow_role, nombre). El nombre se guarda solo para mostrar: quien
+    decide sigue siendo el rol.
+    """
+    if not disponible():
+        return {"ok": False, "motivo": "sin credenciales de Startrack",
+                "origen": "semilla"}
+
+    roles = catalogo_estados_tarea()
+    jobs = tareas()
+    if not jobs:
+        return {"ok": False, "motivo": "/api/job no devolvio tareas",
+                "origen": "semilla"}
+
+    indice: dict[str, dict[str, Any]] = {}
+    for j in jobs:
+        for llave in (j.get("remote_id"), j.get("id")):
+            if llave not in (None, ""):
+                indice.setdefault(_codigo_en(str(llave)), j)
+
+    actualizadas, sin_cruce = 0, []
+    for fila in q(
+        "SELECT t.tarea_id, t.maquinaria, t.remote_id,"
+        " (SELECT s.no_activo FROM ps_solicitudes s"
+        "  WHERE s.maquinaria = t.maquinaria AND s.no_activo IS NOT NULL"
+        "  LIMIT 1) AS no_activo"
+        " FROM ps_tareas t"
+    ):
+        job = None
+        for cand in (fila.get("remote_id"), fila.get("no_activo"),
+                     fila["maquinaria"]):
+            if cand and _codigo_en(str(cand)) in indice:
+                job = indice[_codigo_en(str(cand))]
+                break
+        if job is None:
+            sin_cruce.append(fila["maquinaria"])
+            continue
+
+        campos: dict[str, Any] = {}
+        sid = str(job.get("status") or "")
+        if sid in roles:
+            rol, nombre = roles[sid]
+            campos["workflow_role"] = rol
+            if nombre:
+                campos["estado_tarea"] = nombre
+        if job.get("poi_name"):
+            campos["destino_proyecto_nombre"] = job["poi_name"]
+        if not campos:
+            continue
+
+        sets = ", ".join(f"{k} = ?" for k in campos)
+        x(f"UPDATE ps_tareas SET {sets} WHERE tarea_id = ?",
+          (*campos.values(), fila["tarea_id"]))
+        actualizadas += 1
+
+    return {"ok": True, "origen": "startrack", "peticiones": 2,
+            "tareas_en_startrack": len(jobs), "actualizadas": actualizadas,
+            "sin_cruce": sin_cruce}
+
+
 def sincronizar() -> dict[str, Any]:
     """Refresca ps_tareas con lo que Startrack reporta AHORA.
 
@@ -254,6 +370,7 @@ def sincronizar() -> dict[str, Any]:
                 epoch, timezone.utc).isoformat()
         if coms is not None:
             campos["conexion"] = ("Conectado" if coms < 3600 else "Sin conexion")
+
 
         campos = {k: v_ for k, v_ in campos.items() if v_ not in (None, "")}
         sets = ", ".join(f"{k} = ?" for k in campos)

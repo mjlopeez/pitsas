@@ -136,11 +136,20 @@ def fallas(**params: Any) -> list[dict[str, Any]]:
     return _lista(_get("/api/maquinaria/fallas", params))
 
 
-def _campo(d: dict[str, Any], *nombres: str) -> Any:
-    """El sandbox no garantiza el nombre exacto: se prueban los candidatos."""
+def _campo(d: dict[str, Any], *nombres: str,
+           faltantes: set[str] | None = None) -> Any:
+    """El sandbox no garantiza el nombre exacto: se prueban los candidatos.
+
+    Si ninguno acierta se anota en `faltantes`. Sin esto, un nombre que no
+    adivinamos entra como NULL EN SILENCIO — y un precio_hora en NULL
+    significa exposicion $0, o sea que el Hub diria que no se pierde nada.
+    Mejor que la respuesta diga que no supo leerlo.
+    """
     for n in nombres:
         if d.get(n) not in (None, ""):
             return d[n]
+    if faltantes is not None:
+        faltantes.add(nombres[0])
     return None
 
 
@@ -160,8 +169,10 @@ def sincronizar() -> dict[str, Any]:
                 "origen": "semilla"}
 
     escritas = 0
+    faltantes: set[str] = set()
     for s in sols:
-        sid = str(_campo(s, "id", "request_id", "solicitud_id") or "")
+        sid = str(_campo(s, "id", "request_id", "solicitud_id",
+                         faltantes=faltantes) or "")
         if not sid:
             continue
         eq = s.get("maquinaria") or s.get("equipo") or {}
@@ -170,29 +181,48 @@ def sincronizar() -> dict[str, Any]:
         maq = str(_campo(s, "maquinaria_id", "equipo_id")
                   or _campo(eq, "no_activo", "clave", "id")
                   or f"SOL-{sid}-SIN-UNIDAD")
+
+        # Si la semilla YA tiene una solicitud para esta maquina, se escribe
+        # sobre ESA fila en vez de crear `PRISMA-<id>`. Sin esto el
+        # INSERT OR REPLACE no reemplazaba: duplicaba. El roster terminaba
+        # sumando la misma operacion dos veces, una de la semilla y otra del
+        # sandbox, y la exposicion salia al doble.
+        existente = q1("SELECT solicitud_id FROM ps_solicitudes"
+                       " WHERE maquinaria = ? ORDER BY solicitud_id LIMIT 1",
+                       (maq,))
+        destino_id = (existente or {}).get("solicitud_id") or f"PRISMA-{sid}"
+
         x("INSERT OR REPLACE INTO ps_solicitudes"
           " (solicitud_id, proyecto_id, proyecto_nombre, tipo_solicitado,"
           "  fecha_inicio, fecha_fin, estado_solicitud, maquinaria,"
           "  estado_maquinaria, clave, no_activo, empresa, clase_equipo,"
           "  precio_hora, horas_minimas, operador, partida_asignada)"
           " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-          (f"PRISMA-{sid}",
-           str(_campo(s, "proyecto_id", "project_id") or ""),
-           _campo(s, "proyecto_nombre", "project_name", "proyecto"),
+          (destino_id,
+           str(_campo(s, "proyecto_id", "project_id", faltantes=faltantes) or ""),
+           _campo(s, "proyecto_nombre", "project_name", "proyecto", faltantes=faltantes),
            _campo(s, "tipo_solicitado", "tipo", "clase_equipo"),
            _campo(s, "fecha_inicio", "start_date"),
            _campo(s, "fecha_fin", "end_date"),
-           _campo(s, "estado", "status", "estado_solicitud"),
+           _campo(s, "estado", "status", "estado_solicitud", faltantes=faltantes),
            maq,
-           _campo(eq, "estado", "estado_maquinaria"),
+           _campo(eq, "estado", "estado_maquinaria", faltantes=faltantes),
            _campo(eq, "clave"), _campo(eq, "no_activo"),
            _campo(eq, "empresa"), _campo(eq, "clase_equipo", "tipo"),
-           _campo(eq, "precio_hora", "precio_x_hora"),
-           _campo(eq, "horas_minimas", "horas_minimas_jornada"),
+           _campo(eq, "precio_hora", "precio_x_hora", faltantes=faltantes),
+           _campo(eq, "horas_minimas", "horas_minimas_jornada", faltantes=faltantes),
            _campo(s, "operador", "operador_nombre"),
            _campo(s, "partida", "partida_asignada")))
         escritas += 1
 
     total = (q1("SELECT COUNT(*) AS n FROM ps_solicitudes") or {"n": 0})["n"]
-    return {"ok": True, "origen": "prisma", "escritas": escritas,
-            "solicitudes_totales": total}
+    resultado = {"ok": True, "origen": "prisma", "escritas": escritas,
+                 "solicitudes_totales": total}
+    if faltantes:
+        # Que salga en la respuesta y no en un log que nadie mira: si
+        # `precio_hora` esta aqui, la exposicion en dolares NO es confiable.
+        resultado["campos_no_reconocidos"] = sorted(faltantes)
+        resultado["aviso"] = ("Hay campos que no se pudieron leer del sandbox."
+                              " Revisar la respuesta cruda antes de confiar en"
+                              " las cifras derivadas.")
+    return resultado

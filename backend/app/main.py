@@ -124,6 +124,31 @@ def sync_startrack() -> dict[str, object]:
     return sincronizar()
 
 
+@app.post("/admin/sync-tareas", dependencies=[Depends(proteger)])
+def sync_tareas() -> dict[str, object]:
+    """Refresca el ESTADO de las tareas (workflow_role) contra /api/job.
+
+    Aparte de sync-startrack a proposito: esa resuelve toda la flota en UNA
+    peticion a /api/fleet/status y no queremos invalidar esa propiedad, que
+    scripts/prueba_startrack.py verifica. Ver startrack.sincronizar_tareas.
+    """
+    from .startrack import sincronizar_tareas
+
+    return sincronizar_tareas()
+
+
+@app.post("/admin/sync-geocercas", dependencies=[Depends(proteger)])
+def sync_geocercas() -> dict[str, object]:
+    """Refresca ps_geocercas contra /api/pois de Startrack.
+
+    Tambien aparte: las geocercas casi no cambian, y una sincronizacion de
+    flota no deberia depender de que /api/pois responda.
+    """
+    from .startrack import sincronizar_geocercas
+
+    return sincronizar_geocercas()
+
+
 @app.post("/admin/base-diesel", dependencies=[Depends(proteger)])
 def base_diesel(asset: str, consumido: float) -> dict[str, object]:
     """
