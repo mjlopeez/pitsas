@@ -1,4 +1,4 @@
-// Componente Dashboard General — Estética Editorial Goodlife El Salvador (No AI Slop)
+// Componente Dashboard General — Estética Azul Frío Pizarra & Acero (Amigable & Sin AI Slop)
 
 let fleetChartInstance = null;
 let savingsChartInstance = null;
@@ -35,20 +35,16 @@ function renderDashboard(container) {
   container.innerHTML = `
     <div class="space-y-6">
       
-      <!-- Banner Editorial de Bienvenida y Resumen Ejecutivo -->
-      <div class="gl-card p-6 sm:p-8 bg-white border border-[#e8e6e1] relative">
+      <!-- Banner de Bienvenida y Resumen Ejecutivo -->
+      <div class="gl-card p-6 sm:p-8 bg-white border border-[#d4dfe8] relative">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 relative z-10">
           <div>
-            <span class="gl-subtitle text-[#bf9410] block mb-1">OPERACIONES EN TIEMPO REAL • GRUPO ECON</span>
-            <h1 class="font-editorial-serif text-2xl sm:text-3xl font-normal text-[#111111] tracking-wide">
+            <span class="gl-subtitle text-[#2e5b82] block mb-1">OPERACIONES EN TIEMPO REAL • GRUPO ECON</span>
+            <h1 class="font-sans text-2xl sm:text-3xl font-bold text-[#1e293b] tracking-tight">
               Torre de Control de Maquinaria y Materiales
             </h1>
-            <div class="gl-separator justify-start my-2">
-              <svg width="65" height="12" viewBox="0 0 65 12" fill="none">
-                <path stroke="#bf9410" stroke-width="1.2" stroke-miterlimit="3" d="M1 10 L9 2 L17 10 L24 2 L32 10 L39 2 L47 10 L54 2 L64 10"/>
-              </svg>
-            </div>
-            <p class="text-xs sm:text-sm text-[#555555] max-w-2xl leading-relaxed">
+            <div class="gl-separator justify-start my-2"></div>
+            <p class="text-xs sm:text-sm text-[#475569] max-w-2xl leading-relaxed">
               Integración continua de telemetría de campo OEM (Caterpillar, Komatsu), sensores CAN J1939 y sincronización de ERP Nexus con rastreo Startrack bajo norma ISO 15143-3 en las 18 obras activas de El Salvador.
             </p>
           </div>
@@ -59,7 +55,7 @@ function renderDashboard(container) {
               <span>Dosificar Concreto</span>
             </button>
             <button onclick="window.switchTab('reconciliation')" class="gl-btn-outline">
-              <i data-lucide="git-compare" class="w-4 h-4 text-[#bf9410]"></i>
+              <i data-lucide="git-compare" class="w-4 h-4 text-[#2e5b82]"></i>
               <span>Auditoría Silos</span>
             </button>
           </div>
@@ -70,18 +66,18 @@ function renderDashboard(container) {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
         <!-- Card 1: Flota Total -->
-        <div class="gl-card p-5 bg-white border border-[#e8e6e1]">
+        <div class="gl-card p-5 bg-white border border-[#d4dfe8]">
           <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-[#777777]">Total Maquinaria</span>
-            <div class="w-8 h-8 rounded bg-[#faf9f6] border border-[#d6d3cb] flex items-center justify-center text-[#111111]">
-              <i data-lucide="truck" class="w-4 h-4 text-[#bf9410]"></i>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-[#64748b]">Total Maquinaria</span>
+            <div class="w-8 h-8 rounded-lg bg-[#f1f5f9] border border-[#cbd5e1] flex items-center justify-center text-[#2e5b82]">
+              <i data-lucide="truck" class="w-4 h-4 text-[#2e5b82]"></i>
             </div>
           </div>
           <div class="mt-3 flex items-baseline gap-2">
-            <span class="font-editorial-serif text-3xl font-normal text-[#111111] font-mono">${assets.length || 152}</span>
-            <span class="text-xs text-[#555555] font-semibold">unidades</span>
+            <span class="font-sans text-3xl font-bold text-[#1e293b] font-mono">${assets.length || 152}</span>
+            <span class="text-xs text-[#64748b] font-semibold">unidades</span>
           </div>
-          <div class="mt-3 pt-3 border-t border-[#e8e6e1] flex items-center justify-between text-xs text-[#555555]">
+          <div class="mt-3 pt-3 border-t border-[#d4dfe8] flex items-center justify-between text-xs text-[#64748b]">
             <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> ${engineOn} ON</span>
             <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span> ${engineIdle} Ralentí</span>
             <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-slate-400"></span> ${engineOff} OFF</span>
@@ -89,37 +85,37 @@ function renderDashboard(container) {
         </div>
 
         <!-- Card 2: Beneficio Económico Hub -->
-        <div class="gl-card p-5 bg-white border border-[#e8e6e1]">
+        <div class="gl-card p-5 bg-white border border-[#d4dfe8]">
           <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-[#777777]">Ahorro Anual Estimado</span>
-            <div class="w-8 h-8 rounded bg-[#faf9f6] border border-[#d6d3cb] flex items-center justify-center text-[#15803d]">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-[#64748b]">Ahorro Anual Estimado</span>
+            <div class="w-8 h-8 rounded-lg bg-[#edf7f2] border border-[#bfe5d3] flex items-center justify-center text-[#2b7a59]">
               <i data-lucide="trending-up" class="w-4 h-4"></i>
             </div>
           </div>
           <div class="mt-3 flex items-baseline gap-2">
-            <span class="font-editorial-serif text-3xl font-normal text-[#15803d] font-mono">$${(analytics.modelo_anual?.beneficio_total || 228000).toLocaleString()}</span>
-            <span class="text-xs text-[#777777]">USD/año</span>
+            <span class="font-sans text-3xl font-bold text-[#2b7a59] font-mono">$${(analytics.modelo_anual?.beneficio_total || 228000).toLocaleString()}</span>
+            <span class="text-xs text-[#64748b]">USD/año</span>
           </div>
-          <div class="mt-3 pt-3 border-t border-[#e8e6e1] flex items-center justify-between text-xs text-[#555555]">
-            <span class="text-[#15803d] font-semibold">30k gal diésel evitado</span>
-            <span class="text-[#777777]">ROI: 2.5 meses</span>
+          <div class="mt-3 pt-3 border-t border-[#d4dfe8] flex items-center justify-between text-xs text-[#64748b]">
+            <span class="text-[#2b7a59] font-semibold">30k gal diésel evitado</span>
+            <span class="text-[#64748b]">ROI: 2.5 meses</span>
           </div>
         </div>
 
         <!-- Card 3: Cargas Vivas de Materiales -->
-        <div class="gl-card p-5 bg-white border border-[#e8e6e1]">
+        <div class="gl-card p-5 bg-white border border-[#d4dfe8]">
           <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-[#777777]">Cargas de Concreto</span>
-            <div class="w-8 h-8 rounded bg-[#faf9f6] border border-[#d6d3cb] flex items-center justify-center text-[#0e2439]">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-[#64748b]">Cargas de Concreto</span>
+            <div class="w-8 h-8 rounded-lg bg-[#f1f5f9] border border-[#cbd5e1] flex items-center justify-center text-[#2e5b82]">
               <i data-lucide="package" class="w-4 h-4"></i>
             </div>
           </div>
           <div class="mt-3 flex items-baseline gap-2">
-            <span class="font-editorial-serif text-3xl font-normal text-[#111111] font-mono">${cargas.length}</span>
-            <span class="text-xs text-[#777777]">lotes activos</span>
+            <span class="font-sans text-3xl font-bold text-[#1e293b] font-mono">${cargas.length}</span>
+            <span class="text-xs text-[#64748b]">lotes activos</span>
           </div>
-          <div class="mt-3 pt-3 border-t border-[#e8e6e1] flex items-center justify-between text-xs text-[#555555]">
-            <span class="text-[#0e2439] font-semibold">${cargasEnTransito} en tránsito</span>
+          <div class="mt-3 pt-3 border-t border-[#d4dfe8] flex items-center justify-between text-xs text-[#64748b]">
+            <span class="text-[#1e293b] font-semibold">${cargasEnTransito} en tránsito</span>
             ${cargasRetenidas > 0 
               ? `<span class="gl-badge gl-badge-danger">${cargasRetenidas} RETENIDA</span>` 
               : `<span class="gl-badge gl-badge-success">100% OK</span>`
@@ -128,33 +124,33 @@ function renderDashboard(container) {
         </div>
 
         <!-- Card 4: Costo Expuesto Silos -->
-        <div class="gl-card p-5 bg-white border border-[#e8e6e1]">
+        <div class="gl-card p-5 bg-white border border-[#d4dfe8]">
           <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-[#777777]">Costo Expuesto Silos</span>
-            <div class="w-8 h-8 rounded bg-[#faf9f6] border border-[#d6d3cb] flex items-center justify-center text-[#c62828]">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-[#64748b]">Costo Expuesto Silos</span>
+            <div class="w-8 h-8 rounded-lg bg-[#fdf2f2] border border-[#f7caca] flex items-center justify-center text-[#a33d3d]">
               <i data-lucide="alert-triangle" class="w-4 h-4"></i>
             </div>
           </div>
           <div class="mt-3 flex items-baseline gap-2">
-            <span class="font-editorial-serif text-3xl font-normal text-[#c62828] font-mono">$${(sangradoTotalUsd || 1696.9).toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}</span>
-            <span class="text-xs text-[#777777]">USD</span>
+            <span class="font-sans text-3xl font-bold text-[#a33d3d] font-mono">$${(sangradoTotalUsd || 1696.9).toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}</span>
+            <span class="text-xs text-[#64748b]">USD</span>
           </div>
-          <div class="mt-3 pt-3 border-t border-[#e8e6e1] flex items-center justify-between text-xs text-[#555555]">
-            <span class="text-[#c62828] font-semibold">Sin respaldo</span>
-            <button onclick="window.switchTab('reconciliation')" class="text-[#bf9410] font-bold hover:underline">Ver detalle</button>
+          <div class="mt-3 pt-3 border-t border-[#d4dfe8] flex items-center justify-between text-xs text-[#64748b]">
+            <span class="text-[#a33d3d] font-semibold">Sin respaldo</span>
+            <button onclick="window.switchTab('reconciliation')" class="text-[#2e5b82] font-semibold hover:underline">Ver detalle</button>
           </div>
         </div>
 
       </div>
 
       <!-- Estado de Vedas VMT y Corredores -->
-      <div class="gl-card p-5 sm:p-6 bg-white border border-[#e8e6e1]">
-        <div class="flex items-center justify-between mb-3 pb-3 border-b border-[#e8e6e1]">
+      <div class="gl-card p-5 sm:p-6 bg-white border border-[#d4dfe8]">
+        <div class="flex items-center justify-between mb-3 pb-3 border-b border-[#d4dfe8]">
           <div class="flex items-center gap-2">
-            <i data-lucide="shield-alert" class="w-4 h-4 text-[#bf9410]"></i>
-            <h3 class="font-bold text-xs uppercase tracking-wider text-[#111111]">Estado de Tránsito Pesado VMT (AMSS & Corredores)</h3>
+            <i data-lucide="shield-alert" class="w-4 h-4 text-[#2e5b82]"></i>
+            <h3 class="font-bold text-xs uppercase tracking-wider text-[#1e293b]">Estado de Tránsito Pesado VMT (AMSS & Corredores)</h3>
           </div>
-          <button onclick="window.switchTab('dispatch')" class="text-xs text-[#bf9410] hover:text-[#a37c0a] font-bold flex items-center gap-1">
+          <button onclick="window.switchTab('dispatch')" class="text-xs text-[#2e5b82] hover:text-[#234563] font-semibold flex items-center gap-1">
             Ver Programación <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </button>
         </div>
@@ -162,17 +158,17 @@ function renderDashboard(container) {
           ${corridors.map(cor => {
             const hasVedas = cor.vedas && cor.vedas.length > 0;
             return `
-              <div class="p-3.5 rounded border border-[#e8e6e1] bg-[#faf9f6] flex flex-col justify-between">
+              <div class="p-3.5 rounded-lg border border-[#d4dfe8] bg-[#f8fafc] flex flex-col justify-between">
                 <div>
                   <div class="flex items-center justify-between mb-1">
-                    <span class="text-xs font-bold text-[#111111] truncate" title="${cor.nombre}">${cor.nombre.split('—')[0]}</span>
+                    <span class="text-xs font-bold text-[#1e293b] truncate" title="${cor.nombre}">${cor.nombre.split('—')[0]}</span>
                     <span class="gl-badge ${hasVedas ? 'gl-badge-gold' : 'gl-badge-success'} text-[9px]">
                       ${hasVedas ? 'Restringido' : 'Vía Libre'}
                     </span>
                   </div>
-                  <p class="text-[11px] text-[#666666] line-clamp-1">${cor.nombre}</p>
+                  <p class="text-[11px] text-[#64748b] line-clamp-1">${cor.nombre}</p>
                 </div>
-                <div class="mt-2 text-[11px] font-mono text-[#555555]">
+                <div class="mt-2 text-[11px] font-mono text-[#64748b]">
                   ${hasVedas ? 'Pico 06:00-09:00 / 15:30-19:30' : `Alterna (+${cor.penalidad_min} min)`}
                 </div>
               </div>
@@ -185,13 +181,13 @@ function renderDashboard(container) {
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         <!-- Gráfico 1: Desglose de Maquinaria por Tipo -->
-        <div class="gl-card p-5 sm:p-6 bg-white border border-[#e8e6e1]">
-          <div class="flex items-center justify-between mb-4 pb-3 border-b border-[#e8e6e1]">
+        <div class="gl-card p-5 sm:p-6 bg-white border border-[#d4dfe8]">
+          <div class="flex items-center justify-between mb-4 pb-3 border-b border-[#d4dfe8]">
             <div>
-              <h3 class="font-editorial-serif text-lg font-normal text-[#111111]">Composición de Flota Activa</h3>
-              <p class="text-xs text-[#666666]">Distribución de maquinaria por categoría de trabajo</p>
+              <h3 class="font-sans text-lg font-bold text-[#1e293b]">Composición de Flota Activa</h3>
+              <p class="text-xs text-[#64748b]">Distribución de maquinaria por categoría de trabajo</p>
             </div>
-            <i data-lucide="pie-chart" class="w-4 h-4 text-[#bf9410]"></i>
+            <i data-lucide="pie-chart" class="w-4 h-4 text-[#2e5b82]"></i>
           </div>
           <div class="h-64 relative flex items-center justify-center">
             <canvas id="chart-fleet-types"></canvas>
@@ -199,13 +195,13 @@ function renderDashboard(container) {
         </div>
 
         <!-- Gráfico 2: Desglose del Beneficio Total -->
-        <div class="gl-card p-5 sm:p-6 bg-white border border-[#e8e6e1]">
-          <div class="flex items-center justify-between mb-4 pb-3 border-b border-[#e8e6e1]">
+        <div class="gl-card p-5 sm:p-6 bg-white border border-[#d4dfe8]">
+          <div class="flex items-center justify-between mb-4 pb-3 border-b border-[#d4dfe8]">
             <div>
-              <h3 class="font-editorial-serif text-lg font-normal text-[#111111]">Impacto Económico del Hub (USD/año)</h3>
-              <p class="text-xs text-[#666666]">Ahorro directo en diésel, logística y taller</p>
+              <h3 class="font-sans text-lg font-bold text-[#1e293b]">Impacto Económico del Hub (USD/año)</h3>
+              <p class="text-xs text-[#64748b]">Ahorro directo en diésel, logística y taller</p>
             </div>
-            <i data-lucide="bar-chart-3" class="w-4 h-4 text-[#15803d]"></i>
+            <i data-lucide="bar-chart-3" class="w-4 h-4 text-[#2b7a59]"></i>
           </div>
           <div class="h-64 relative flex items-center justify-center">
             <canvas id="chart-savings-breakdown"></canvas>
@@ -215,10 +211,10 @@ function renderDashboard(container) {
       </div>
 
       <!-- KPIs Operativos de Nexus vs Hub de Operaciones -->
-      <div class="gl-card p-5 sm:p-6 bg-white border border-[#e8e6e1]">
-        <div class="pb-3 mb-3 border-b border-[#e8e6e1]">
-          <span class="gl-subtitle text-[#bf9410] block mb-0.5">BENCHMARK DE EFICIENCIA OPERATIVA</span>
-          <h3 class="font-editorial-serif text-lg font-normal text-[#111111]">Línea Base vs Operación con Hub ECON</h3>
+      <div class="gl-card p-5 sm:p-6 bg-white border border-[#d4dfe8]">
+        <div class="pb-3 mb-3 border-b border-[#d4dfe8]">
+          <span class="gl-subtitle text-[#2e5b82] block mb-0.5">BENCHMARK DE EFICIENCIA OPERATIVA</span>
+          <h3 class="font-sans text-lg font-bold text-[#1e293b]">Línea Base vs Operación con Hub ECON</h3>
         </div>
         <div class="gl-table-wrap">
           <table class="gl-table">
@@ -233,10 +229,10 @@ function renderDashboard(container) {
             <tbody>
               ${(analytics.kpis || []).map(kpi => `
                 <tr>
-                  <td class="font-bold text-[#111111]">${kpi.kpi}</td>
-                  <td class="text-[#c62828] font-mono">${kpi.base}</td>
-                  <td class="text-[#15803d] font-mono font-bold">${kpi.con_hub}</td>
-                  <td class="text-[#555555]">${kpi.mecanismo}</td>
+                  <td class="font-semibold text-[#1e293b]">${kpi.kpi}</td>
+                  <td class="text-[#a33d3d] font-mono">${kpi.base}</td>
+                  <td class="text-[#2b7a59] font-mono font-bold">${kpi.con_hub}</td>
+                  <td class="text-[#475569]">${kpi.mecanismo}</td>
                 </tr>
               `).join('')}
             </tbody>
@@ -279,12 +275,12 @@ function initCharts(assets, analytics) {
         datasets: [{
           data: topKinds.map(k => k[1]),
           backgroundColor: [
-            '#0e2439', // Navy ECON
-            '#bf9410', // Oro GoodLife
-            '#15803d', // Esmeralda
-            '#423d90', // Púrpura Nexus
-            '#c62828', // Rojo Startrack
-            '#777777'  // Gris neutro
+            '#1e293b', // Azul pizarra oscuro
+            '#2e5b82', // Azul acero frío
+            '#475569', // Pizarra medio
+            '#699cc4', // Azul acero suave
+            '#2b7a59', // Verde esmeralda frío
+            '#94a3b8'  // Gris frío slate
           ],
           borderColor: '#ffffff',
           borderWidth: 2
@@ -296,7 +292,7 @@ function initCharts(assets, analytics) {
         plugins: {
           legend: {
             position: 'right',
-            labels: { color: '#333333', font: { size: 11, family: 'Open Sans' } }
+            labels: { color: '#334155', font: { size: 11, family: 'Plus Jakarta Sans' } }
           }
         },
         cutout: '65%'
@@ -320,8 +316,8 @@ function initCharts(assets, analytics) {
         datasets: [{
           label: 'Ahorro Anual (USD)',
           data: [modelo.ahorro_diesel, modelo.ahorro_logistica, modelo.ahorro_taller],
-          backgroundColor: ['#0e2439', '#bf9410', '#15803d'],
-          borderRadius: 4
+          backgroundColor: ['#2e5b82', '#437aa7', '#2b7a59'],
+          borderRadius: 6
         }]
       },
       options: {
@@ -332,16 +328,16 @@ function initCharts(assets, analytics) {
         },
         scales: {
           y: {
-            grid: { color: 'rgba(0, 0, 0, 0.05)' },
+            grid: { color: 'rgba(212, 223, 232, 0.4)' },
             ticks: {
-              color: '#666666',
+              color: '#64748b',
               font: { family: 'JetBrains Mono', size: 10 },
               callback: val => `$${val / 1000}k`
             }
           },
           x: {
             grid: { display: false },
-            ticks: { color: '#333333', font: { size: 11, family: 'Open Sans' } }
+            ticks: { color: '#334155', font: { size: 11, family: 'Plus Jakarta Sans' } }
           }
         }
       }

@@ -50,6 +50,8 @@ window.ECON_CONFIG = {
     sinteticoLimpiar: '/api/sintetico/limpiar',
     sinteticoWebhookEjemplo: (id) => `/api/sintetico/webhook-ejemplo/${encodeURIComponent(id)}`,
     startrackUbicaciones: '/webhooks/startrack/ubicaciones',
-    startrackAlertas: '/webhooks/startrack/alertas'
+    startrackAlertas: '/webhooks/startrack/alertas',
+    adminSyncTareas: '/admin/sync-tareas',
+    adminSyncGeocercas: '/admin/sync-geocercas'
   }
 };

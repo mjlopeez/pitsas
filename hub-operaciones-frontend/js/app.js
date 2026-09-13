@@ -6,10 +6,10 @@ window.showToast = function(message, type = 'info') {
   if (!toastContainer) return;
 
   const toast = document.createElement('div');
-  const borderCol = type === 'success' ? 'border-[#bbf7d0] bg-white text-[#15803d]' :
-                    type === 'error' ? 'border-[#fca5a5] bg-white text-[#c62828]' :
-                    type === 'warning' ? 'border-[#fde68a] bg-white text-[#8c6a05]' :
-                    'border-[#e8e6e1] bg-white text-[#111111]';
+  const borderCol = type === 'success' ? 'border-[#bbf7d0] bg-white text-[#2b7a59]' :
+                    type === 'error' ? 'border-[#fca5a5] bg-white text-[#36536e]' :
+                    type === 'warning' ? 'border-[#fde68a] bg-white text-[#1b3a57]' :
+                    'border-[#d4dfe8] bg-white text-[#1e293b]';
 
   const iconName = type === 'success' ? 'check-circle' :
                    type === 'error' ? 'alert-octagon' :
@@ -18,8 +18,8 @@ window.showToast = function(message, type = 'info') {
   toast.className = `p-3.5 rounded border shadow-lg flex items-center gap-2.5 text-xs font-semibold transition-all transform translate-y-2 opacity-0 ${borderCol}`;
   toast.innerHTML = `
     <i data-lucide="${iconName}" class="w-4 h-4 shrink-0"></i>
-    <span class="flex-1 text-[#222222]">${message}</span>
-    <button class="text-[#888888] hover:text-[#111111] ml-2 text-sm">&times;</button>
+    <span class="flex-1 text-[#1e293b]">${message}</span>
+    <button class="text-[#888888] hover:text-[#1e293b] ml-2 text-sm">&times;</button>
   `;
 
   toastContainer.appendChild(toast);
@@ -156,55 +156,51 @@ window.showPeaLiberadaModal = function(pea) {
 
   modalRoot.innerHTML = `
     <div class="fixed inset-0 modal-overlay z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-      <div class="gl-card max-w-lg w-full p-6 sm:p-8 bg-white border border-[#e8e6e1] shadow-2xl my-auto text-[#222222]">
+      <div class="gl-card max-w-lg w-full p-6 sm:p-8 bg-white border border-[#d4dfe8] shadow-2xl my-auto text-[#1e293b]">
         
         <!-- Header Editorial Goodlife -->
-        <div class="text-center pb-3 mb-4 border-b border-[#e8e6e1]">
-          <span class="gl-subtitle text-[#bf9410] block mb-1">HOMOLOGACIÓN DE SILOS CONCLUIDA</span>
-          <h2 class="font-editorial-serif text-2xl sm:text-3xl font-normal text-[#111111]">¡Prueba de Evidencia Liberada!</h2>
-          <div class="gl-separator">
-            <svg width="65" height="12" viewBox="0 0 65 12" fill="none">
-              <path stroke="#bf9410" stroke-width="1.2" stroke-miterlimit="3" d="M1 10 L9 2 L17 10 L24 2 L32 10 L39 2 L47 10 L54 2 L64 10"/>
-            </svg>
-          </div>
-          <p class="text-xs text-[#555555] max-w-sm mx-auto leading-relaxed">
+        <div class="text-center pb-3 mb-4 border-b border-[#d4dfe8]">
+          <span class="gl-subtitle text-[#2e5b82] block mb-1">HOMOLOGACIÓN DE SILOS CONCLUIDA</span>
+          <h2 class="font-sans text-2xl sm:text-3xl font-bold text-[#1e293b] tracking-tight">¡Prueba de Evidencia Liberada!</h2>
+          <div class="gl-separator justify-start my-2"></div>
+          <p class="text-xs text-[#475569] max-w-sm mx-auto leading-relaxed">
             Los <strong>4 criterios de Startrack</strong> (físicos) y los <strong>4 criterios de Nexus ERP</strong> (contractuales) coinciden al 100%. La liquidación horaria queda legal y técnicamente respaldada.
           </p>
         </div>
 
-        <div class="space-y-4 text-xs text-[#333333] leading-relaxed mb-6">
-          <div class="grid grid-cols-2 gap-3 p-4 rounded border border-[#e8e6e1] bg-[#faf9f6] text-xs">
+        <div class="space-y-4 text-xs text-[#334155] leading-relaxed mb-6">
+          <div class="grid grid-cols-2 gap-3 p-4 rounded border border-[#d4dfe8] bg-[#f8fafc] text-xs">
             <div>
-              <span class="text-[#777777] text-[10px] uppercase font-bold tracking-wider block">Unidad Auditada:</span>
-              <span class="text-[#111111] font-bold text-sm font-mono">${pea.maquinaria} (Cat 320D)</span>
+              <span class="text-[#64748b] text-[10px] uppercase font-bold tracking-wider block">Unidad Auditada:</span>
+              <span class="text-[#1e293b] font-bold text-sm font-mono">${pea.maquinaria} (Cat 320D)</span>
             </div>
             <div>
-              <span class="text-[#777777] text-[10px] uppercase font-bold tracking-wider block">Monto Respaldado:</span>
-              <span class="text-[#15803d] font-bold text-sm font-mono">$${pea.monto_liberado.toFixed(2)} USD</span>
+              <span class="text-[#64748b] text-[10px] uppercase font-bold tracking-wider block">Monto Respaldado:</span>
+              <span class="text-[#2b7a59] font-bold text-sm font-mono">$${pea.monto_liberado.toFixed(2)} USD</span>
             </div>
             <div>
-              <span class="text-[#777777] text-[10px] uppercase font-bold tracking-wider block">Horas Validadas:</span>
-              <span class="text-[#111111] font-bold text-sm font-mono">${pea.horas_validadas} h (Motor ON)</span>
+              <span class="text-[#64748b] text-[10px] uppercase font-bold tracking-wider block">Horas Validadas:</span>
+              <span class="text-[#1e293b] font-bold text-sm font-mono">${pea.horas_validadas} h (Motor ON)</span>
             </div>
             <div>
-              <span class="text-[#777777] text-[10px] uppercase font-bold tracking-wider block">Código PEA:</span>
-              <span class="text-[#bf9410] font-bold text-sm font-mono">${pea.pea_id} (ID: ${pea.id || 7})</span>
+              <span class="text-[#64748b] text-[10px] uppercase font-bold tracking-wider block">Código PEA:</span>
+              <span class="text-[#2e5b82] font-bold text-sm font-mono">${pea.pea_id} (ID: ${pea.id || 7})</span>
             </div>
           </div>
 
           <div>
             <div class="flex items-center justify-between mb-1">
-              <span class="text-[10px] uppercase font-bold text-[#777777] tracking-wider block">Firma Criptográfica SHA-256 (Inmutable):</span>
+              <span class="text-[10px] uppercase font-bold text-[#64748b] tracking-wider block">Firma Criptográfica SHA-256 (Inmutable):</span>
               <span class="gl-badge gl-badge-success text-[9px]">API Backend 200 OK</span>
             </div>
-            <div class="p-3 rounded border border-[#bbf7d0] bg-[#f0fdf4] text-[11px] font-mono text-[#15803d] break-all select-all font-semibold">
+            <div class="p-3 rounded border border-[#bbf7d0] bg-[#f0fdf4] text-[11px] font-mono text-[#2b7a59] break-all select-all font-semibold">
               ${pea.hash_sha256}
             </div>
           </div>
         </div>
 
         <!-- Botones Adaptados a Teléfono (Columna en móvil, Fila en desktop) -->
-        <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 pt-3 border-t border-[#e8e6e1]">
+        <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 pt-3 border-t border-[#d4dfe8]">
           <button 
             onclick="document.getElementById('modal-root').innerHTML=''" 
             class="gl-btn-outline w-full sm:w-auto active:scale-95"
@@ -224,7 +220,7 @@ window.showPeaLiberadaModal = function(pea) {
             onclick="document.getElementById('modal-root').innerHTML=''; window.switchPlatform('hub'); window.switchTab('reconciliation');" 
             class="gl-btn-black w-full sm:w-auto active:scale-95"
           >
-            <i data-lucide="scale" class="w-4 h-4 text-[#bf9410]"></i>
+            <i data-lucide="scale" class="w-4 h-4 text-[#2e5b82]"></i>
             <span>Ver en Hub ECON</span>
           </button>
         </div>

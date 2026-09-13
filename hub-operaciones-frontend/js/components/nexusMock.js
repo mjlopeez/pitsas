@@ -49,34 +49,30 @@ function renderNexusMock(container) {
     <div class="space-y-6">
       
       <!-- Banner Editorial Nexus ERP -->
-      <div class="gl-card p-6 sm:p-8 bg-white border border-[#e8e6e1] relative overflow-hidden">
-        <div class="absolute top-0 left-0 right-0 h-1.5 bg-[#423d90]"></div>
+      <div class="gl-card p-6 sm:p-8 bg-white border border-[#d4dfe8] relative overflow-hidden">
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-[#364663]"></div>
 
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <span class="gl-subtitle text-[#423d90] block mb-1">
+            <span class="gl-subtitle text-[#364663] block mb-1">
               GESTIÓN FINANCIERA & COSTOS DE CONSTRUCCIÓN
             </span>
-            <h2 class="font-editorial-serif text-2xl sm:text-3xl font-normal text-[#111111] tracking-wide">
+            <h2 class="font-sans text-2xl sm:text-3xl font-bold text-[#1e293b] tracking-tight">
               Nexus ERP Construcción
             </h2>
-            <div class="gl-separator justify-start my-2">
-              <svg width="65" height="12" viewBox="0 0 65 12" fill="none">
-                <path stroke="#423d90" stroke-width="1.2" stroke-miterlimit="3" d="M1 10 L9 2 L17 10 L24 2 L32 10 L39 2 L47 10 L54 2 L64 10"/>
-              </svg>
-            </div>
-            <p class="text-xs sm:text-sm text-[#555555] max-w-2xl leading-relaxed">
+            <div class="gl-separator justify-start my-2"></div>
+            <p class="text-xs sm:text-sm text-[#475569] max-w-2xl leading-relaxed">
               Módulo corporativo de contratos y requisiciones. Presenta <strong>exclusivamente los 4 criterios administrativos</strong> que Nexus debe autorizar para vincular la orden de trabajo con el presupuesto de obra.
             </p>
           </div>
 
           <!-- Contador de Criterios Administrativos -->
-          <div class="p-4 rounded border border-[#e8e6e1] bg-[#faf9f6] text-center shrink-0 min-w-[160px]">
-            <span class="text-[10px] uppercase font-bold tracking-wider text-[#777777] block">Criterios de Gestión</span>
-            <span class="font-editorial-serif text-3xl font-normal block my-0.5 ${allFulfilled ? 'text-[#15803d]' : 'text-[#423d90]'}">
+          <div class="p-4 rounded border border-[#d4dfe8] bg-[#f8fafc] text-center shrink-0 min-w-[160px]">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-[#64748b] block">Criterios de Gestión</span>
+            <span class="font-sans font-bold text-3xl font-normal block my-0.5 ${allFulfilled ? 'text-[#2b7a59]' : 'text-[#364663]'}">
               ${fulfilledCount} / 4
             </span>
-            <span class="text-[10px] font-bold uppercase tracking-wider ${allFulfilled ? 'text-[#15803d]' : 'text-[#423d90]'}">
+            <span class="text-[10px] font-bold uppercase tracking-wider ${allFulfilled ? 'text-[#2b7a59]' : 'text-[#364663]'}">
               ${allFulfilled ? '✓ Administrativo Listo' : 'Pendiente de Firma'}
             </span>
           </div>
@@ -86,24 +82,24 @@ function renderNexusMock(container) {
       <!-- Los 4 Criterios Exclusivos de Nexus ERP -->
       <div>
         <div class="flex items-center justify-between mb-3">
-          <h3 class="font-editorial-serif text-lg font-normal text-[#111111]">
+          <h3 class="font-sans text-lg font-bold text-[#1e293b]">
             Condiciones Contractuales para Liberación de PEA
           </h3>
-          <span class="text-xs text-[#777777]">Partida: <strong>A 1.02 - EXCAVACION</strong></span>
+          <span class="text-xs text-[#64748b]">Partida: <strong>A 1.02 - EXCAVACION</strong></span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           
           <!-- Criterio 1: Requisición Aprobada -->
-          <div class="gl-card p-5 border transition-all ${reqs.solicitud_approved ? 'border-emerald-300 bg-[#f0fdf4]' : 'border-[#e8e6e1] bg-white'}">
+          <div class="gl-card p-5 border transition-all ${reqs.solicitud_approved ? 'border-emerald-300 bg-[#f0fdf4]' : 'border-[#d4dfe8] bg-white'}">
             <div class="flex items-start justify-between gap-3 mb-2">
               <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded flex items-center justify-center shrink-0 ${reqs.solicitud_approved ? 'bg-emerald-600 text-white' : 'bg-[#faf9f6] border border-[#d6d3cb] text-[#777777]'}">
+                <div class="w-8 h-8 rounded flex items-center justify-center shrink-0 ${reqs.solicitud_approved ? 'bg-emerald-600 text-white' : 'bg-[#f8fafc] border border-[#cbd5e1] text-[#64748b]'}">
                   <i data-lucide="${reqs.solicitud_approved ? 'check' : 'file-check'}" class="w-4 h-4"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-xs sm:text-sm text-[#111111]">1. Requisición Formal Aprobada</h4>
-                  <span class="text-[10px] text-[#777777] font-mono">solicitud_approved (SOL-EXC01)</span>
+                  <h4 class="font-bold text-xs sm:text-sm text-[#1e293b]">1. Requisición Formal Aprobada</h4>
+                  <span class="text-[10px] text-[#64748b] font-mono">solicitud_approved (SOL-EXC01)</span>
                 </div>
               </div>
               <button 
@@ -111,27 +107,27 @@ function renderNexusMock(container) {
                 class="px-3 py-1.5 rounded text-xs font-semibold border transition-all min-h-[40px] cursor-pointer active:scale-95 ${
                   reqs.solicitud_approved 
                     ? 'bg-emerald-100 border-emerald-400 text-emerald-800' 
-                    : 'bg-white border-[#d6d3cb] hover:border-[#111111] text-[#333333]'
+                    : 'bg-white border-[#cbd5e1] hover:border-[#1e293b] text-[#334155]'
                 }"
               >
                 ${reqs.solicitud_approved ? '✓ Aprobada' : 'Aprobar REQ'}
               </button>
             </div>
-            <p class="text-xs text-[#555555] leading-relaxed">
+            <p class="text-xs text-[#475569] leading-relaxed">
               La solicitud de maquinaria pesada cuenta con el aval presupuestario formal emitido por la Gerencia de Construcción de Grupo ECON.
             </p>
           </div>
 
           <!-- Criterio 2: Asignación Unidad -->
-          <div class="gl-card p-5 border transition-all ${reqs.unit_assigned ? 'border-emerald-300 bg-[#f0fdf4]' : 'border-[#e8e6e1] bg-white'}">
+          <div class="gl-card p-5 border transition-all ${reqs.unit_assigned ? 'border-emerald-300 bg-[#f0fdf4]' : 'border-[#d4dfe8] bg-white'}">
             <div class="flex items-start justify-between gap-3 mb-2">
               <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded flex items-center justify-center shrink-0 ${reqs.unit_assigned ? 'bg-emerald-600 text-white' : 'bg-[#faf9f6] border border-[#d6d3cb] text-[#777777]'}">
+                <div class="w-8 h-8 rounded flex items-center justify-center shrink-0 ${reqs.unit_assigned ? 'bg-emerald-600 text-white' : 'bg-[#f8fafc] border border-[#cbd5e1] text-[#64748b]'}">
                   <i data-lucide="${reqs.unit_assigned ? 'check' : 'link'}" class="w-4 h-4"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-xs sm:text-sm text-[#111111]">2. Asignación Física Unidad EXC-01</h4>
-                  <span class="text-[10px] text-[#777777] font-mono">unit_assigned (CAT 320D)</span>
+                  <h4 class="font-bold text-xs sm:text-sm text-[#1e293b]">2. Asignación Física Unidad EXC-01</h4>
+                  <span class="text-[10px] text-[#64748b] font-mono">unit_assigned (CAT 320D)</span>
                 </div>
               </div>
               <button 
@@ -139,27 +135,27 @@ function renderNexusMock(container) {
                 class="px-3 py-1.5 rounded text-xs font-semibold border transition-all min-h-[40px] cursor-pointer active:scale-95 ${
                   reqs.unit_assigned 
                     ? 'bg-emerald-100 border-emerald-400 text-emerald-800' 
-                    : 'bg-white border-[#d6d3cb] hover:border-[#111111] text-[#333333]'
+                    : 'bg-white border-[#cbd5e1] hover:border-[#1e293b] text-[#334155]'
                 }"
               >
                 ${reqs.unit_assigned ? '✓ Asignada' : 'Asignar EXC-01'}
               </button>
             </div>
-            <p class="text-xs text-[#555555] leading-relaxed">
+            <p class="text-xs text-[#475569] leading-relaxed">
               Se asocia la serie y placa del equipo físico específico a la orden de trabajo, impidiendo sustituciones no autorizadas en campo.
             </p>
           </div>
 
           <!-- Criterio 3: Imputación Contable WBS -->
-          <div class="gl-card p-5 border transition-all ${reqs.wbs_rate_linked ? 'border-emerald-300 bg-[#f0fdf4]' : 'border-[#e8e6e1] bg-white'}">
+          <div class="gl-card p-5 border transition-all ${reqs.wbs_rate_linked ? 'border-emerald-300 bg-[#f0fdf4]' : 'border-[#d4dfe8] bg-white'}">
             <div class="flex items-start justify-between gap-3 mb-2">
               <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded flex items-center justify-center shrink-0 ${reqs.wbs_rate_linked ? 'bg-emerald-600 text-white' : 'bg-[#faf9f6] border border-[#d6d3cb] text-[#777777]'}">
+                <div class="w-8 h-8 rounded flex items-center justify-center shrink-0 ${reqs.wbs_rate_linked ? 'bg-emerald-600 text-white' : 'bg-[#f8fafc] border border-[#cbd5e1] text-[#64748b]'}">
                   <i data-lucide="${reqs.wbs_rate_linked ? 'check' : 'dollar-sign'}" class="w-4 h-4"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-xs sm:text-sm text-[#111111]">3. Imputación WBS & Tarifa ($150/h)</h4>
-                  <span class="text-[10px] text-[#777777] font-mono">wbs_rate_linked ($1,200.00 / 8h)</span>
+                  <h4 class="font-bold text-xs sm:text-sm text-[#1e293b]">3. Imputación WBS & Tarifa ($150/h)</h4>
+                  <span class="text-[10px] text-[#64748b] font-mono">wbs_rate_linked ($1,200.00 / 8h)</span>
                 </div>
               </div>
               <button 
@@ -167,27 +163,27 @@ function renderNexusMock(container) {
                 class="px-3 py-1.5 rounded text-xs font-semibold border transition-all min-h-[40px] cursor-pointer active:scale-95 ${
                   reqs.wbs_rate_linked 
                     ? 'bg-emerald-100 border-emerald-400 text-emerald-800' 
-                    : 'bg-white border-[#d6d3cb] hover:border-[#111111] text-[#333333]'
+                    : 'bg-white border-[#cbd5e1] hover:border-[#1e293b] text-[#334155]'
                 }"
               >
                 ${reqs.wbs_rate_linked ? '✓ Tarifa Fija' : 'Vincular Tarifa'}
               </button>
             </div>
-            <p class="text-xs text-[#555555] leading-relaxed">
+            <p class="text-xs text-[#475569] leading-relaxed">
               Se amarra la cuenta de costo contractual WBS de movimiento de tierras con la tarifa horaria oficial de $150.00 USD pactada con el contratista.
             </p>
           </div>
 
           <!-- Criterio 4: Firma Residente -->
-          <div class="gl-card p-5 border transition-all ${reqs.resident_signature ? 'border-emerald-300 bg-[#f0fdf4]' : 'border-[#e8e6e1] bg-white'}">
+          <div class="gl-card p-5 border transition-all ${reqs.resident_signature ? 'border-emerald-300 bg-[#f0fdf4]' : 'border-[#d4dfe8] bg-white'}">
             <div class="flex items-start justify-between gap-3 mb-2">
               <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded flex items-center justify-center shrink-0 ${reqs.resident_signature ? 'bg-emerald-600 text-white' : 'bg-[#faf9f6] border border-[#d6d3cb] text-[#777777]'}">
+                <div class="w-8 h-8 rounded flex items-center justify-center shrink-0 ${reqs.resident_signature ? 'bg-emerald-600 text-white' : 'bg-[#f8fafc] border border-[#cbd5e1] text-[#64748b]'}">
                   <i data-lucide="${reqs.resident_signature ? 'check' : 'pen-tool'}" class="w-4 h-4"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-xs sm:text-sm text-[#111111]">4. Firma Digital del Residente</h4>
-                  <span class="text-[10px] text-[#777777] font-mono">resident_signature (JVCOP)</span>
+                  <h4 class="font-bold text-xs sm:text-sm text-[#1e293b]">4. Firma Digital del Residente</h4>
+                  <span class="text-[10px] text-[#64748b] font-mono">resident_signature (JVCOP)</span>
                 </div>
               </div>
               <button 
@@ -195,13 +191,13 @@ function renderNexusMock(container) {
                 class="px-3 py-1.5 rounded text-xs font-semibold border transition-all min-h-[40px] cursor-pointer active:scale-95 ${
                   reqs.resident_signature 
                     ? 'bg-emerald-100 border-emerald-400 text-emerald-800' 
-                    : 'bg-white border-[#d6d3cb] hover:border-[#111111] text-[#333333]'
+                    : 'bg-white border-[#cbd5e1] hover:border-[#1e293b] text-[#334155]'
                 }"
               >
                 ${reqs.resident_signature ? '✓ Visado' : 'Firmar Residente'}
               </button>
             </div>
-            <p class="text-xs text-[#555555] leading-relaxed">
+            <p class="text-xs text-[#475569] leading-relaxed">
               El Ingeniero Residente en obra certifica en bitácora digital que la excavación cumplió las especificaciones técnicas del Ministerio de Obras Públicas (MOP).
             </p>
           </div>
@@ -210,11 +206,11 @@ function renderNexusMock(container) {
       </div>
 
       <!-- Barra de Acción Inmediata: Completar Todos -->
-      <div class="gl-card p-4 sm:p-5 bg-[#faf9f6] border border-[#e8e6e1] flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="gl-card p-4 sm:p-5 bg-[#f8fafc] border border-[#d4dfe8] flex flex-col sm:flex-row items-center justify-between gap-3">
         <div>
-          <span class="font-bold text-xs text-[#111111] block">Demostración en Vivo con API Real:</span>
-          <p class="text-xs text-[#666666]">
-            Consulta en tiempo real <code class="bg-white px-1 py-0.5 rounded border border-[#d6d3cb] text-[10px]">GET /api/ps/vista-unificada/EXC-01</code> para validar el contrato en el backend.
+          <span class="font-bold text-xs text-[#1e293b] block">Demostración en Vivo con API Real:</span>
+          <p class="text-xs text-[#64748b]">
+            Consulta en tiempo real <code class="bg-white px-1 py-0.5 rounded border border-[#cbd5e1] text-[10px]">GET /api/ps/vista-unificada/EXC-01</code> para validar el contrato en el backend.
           </p>
         </div>
         <div class="flex items-center gap-2 w-full sm:w-auto">
@@ -231,11 +227,11 @@ function renderNexusMock(container) {
       </div>
 
       <!-- Visor de Payload & Respuesta HTTP Real -->
-      <div class="gl-card p-5 bg-white border border-[#e8e6e1]">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-3 border-b border-[#e8e6e1]">
+      <div class="gl-card p-5 bg-white border border-[#d4dfe8]">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-3 border-b border-[#d4dfe8]">
           <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-[#423d90]"></span>
-            <h4 class="font-bold text-xs text-[#111111] uppercase tracking-wider">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#364663]"></span>
+            <h4 class="font-bold text-xs text-[#1e293b] uppercase tracking-wider">
               ${lastNexusApiResponse ? 'Respuesta Real de Nexus ERP desde Backend (HTTP 200)' : 'Payload Contractual Nexus ERP'}
             </h4>
           </div>
@@ -247,7 +243,7 @@ function renderNexusMock(container) {
             `}
             <button 
               onclick="navigator.clipboard.writeText(JSON.stringify(${JSON.stringify(lastNexusApiResponse || currentPayload)}, null, 2)); window.showToast('JSON copiado al portapapeles', 'success');"
-              class="px-2.5 py-1 text-[11px] font-semibold text-[#555555] hover:text-[#111111] bg-[#f4f3f0] hover:bg-[#eae8e3] rounded border border-[#d6d3cb] transition-colors flex items-center gap-1 active:scale-95"
+              class="px-2.5 py-1 text-[11px] font-semibold text-[#475569] hover:text-[#1e293b] bg-[#f1f5f9] hover:bg-[#eae8e3] rounded border border-[#cbd5e1] transition-colors flex items-center gap-1 active:scale-95"
             >
               <i data-lucide="copy" class="w-3 h-3"></i>
               <span>Copiar</span>
